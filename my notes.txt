@@ -1,0 +1,10 @@
+GuyTest@test.com
+1231231
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcmlkIjoiNjM3MjNlZjc1MGQ2ZWNiZTAxNTgyMGQxIiwiaXNCdXNpbmVzc0FjY291bnQiOmZhbHNlLCJpYXQiOjE2Njg0MzgwNDR9.mX3XdXzkAkG9OqTTrUV4oZJvkd6ZNg_SkFN4DTz8msI
+
+GuyShalevTest@test.com
+13131313
+
+ליבדוק אופציה להוסיף רולרדקס לכרטסיות
+
+יש בעיה שלאחר הכניסה למשתמש אין רינדור של הד

@@ -1,0 +1,13 @@
+.regester-choice-container{
+    place-items: center center;
+}
+.register-choice{
+    color: #212529!important;
+    display: flex!important;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 5%!important;
+    width: 100px !important;
+    height: 200px !important;
+}

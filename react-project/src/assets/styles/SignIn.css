@@ -1,0 +1,16 @@
+.sign-in-container{
+    place-items: center center;
+}
+
+.sign-in-form{
+    max-width: 20.625rem;
+}
+
+.form-control:focus {
+    z-index: 5;
+}
+
+.user-logo {
+    width: 4.5em;
+    height: 4.5em;
+}
