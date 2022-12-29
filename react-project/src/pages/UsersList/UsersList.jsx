@@ -1,9 +1,8 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faUser, faUserTie } from '@fortawesome/free-solid-svg-icons'
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faUser, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { Table } from 'react-bootstrap';
 import UpdateUser from '../../components/users/UpdateUser';
-
 
 export default function UsersList({ users, onDelete }) {
     if (!users) return <div>No users</div>;
@@ -15,18 +14,46 @@ export default function UsersList({ users, onDelete }) {
                 <td>{u.firstName}</td>
                 <td>{u.lastName}</td>
                 <td>{u.email}</td>
-                {u.isBusinessAccount ? <td>Business <FontAwesomeIcon icon={faUserTie} className="fa-2x"></FontAwesomeIcon></td> : <td>User <FontAwesomeIcon icon={faUser} className="fa-2x"></FontAwesomeIcon></td> }
+                {u.isBusinessAccount ? (
+                    <td>
+                        Business{' '}
+                        <FontAwesomeIcon
+                            icon={faUserTie}
+                            className='fa-2x'
+                        ></FontAwesomeIcon>
+                    </td>
+                ) : (
+                    <td>
+                        User{' '}
+                        <FontAwesomeIcon
+                            icon={faUser}
+                            className='fa-2x'
+                        ></FontAwesomeIcon>
+                    </td>
+                )}
                 {/* <td>{u.isBusinessAccount}</td> */}
-                <td><button onClick={() => onDelete(u._id)}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button></td>
-                <td><UpdateUser /></td>
+                <td>
+                    <button onClick={() => onDelete(u._id)}>
+                        <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
+                    </button>
+                </td>
+                <td>
+                    <UpdateUser />
+                </td>
             </tr>
-        )
+        );
     });
 
     return (
         <>
             <p>Users: {`(${users.length})`}</p>
-            <Table className='text-center' striped bordered hover variant="dark">
+            <Table
+                className='text-center'
+                striped
+                bordered
+                hover
+                variant='dark'
+            >
                 <thead>
                     <tr>
                         <td>ID</td>
@@ -41,5 +68,5 @@ export default function UsersList({ users, onDelete }) {
                 <tbody>{usersRows}</tbody>
             </Table>
         </>
-    )
+    );
 }
