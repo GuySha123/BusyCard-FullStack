@@ -55,26 +55,6 @@ export async function getUsers() {
 
 export async function deleteUser(id) {
     return fetch(BASE_URL + '/customers/deletecustomer?userid=' + id, {
-        method: 'delete',
+        method: 'DELETE',
     });
-}
-
-export async function getCards() {
-    return fetch(BASE_URL + '/cards').then((res) => res.json());
-}
-
-export async function CreateCardDb(formData, token) {
-    const response = await fetch(BASE_URL + '/cards/create', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            token: token,
-        },
-        body: JSON.stringify(formData),
-    });
-    if (!response.ok) {
-        throw new Error('An error occurred while fetching the user');
-    }
-    const card = await response.json();
-    console.log(card);
 }

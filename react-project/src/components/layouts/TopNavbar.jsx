@@ -22,7 +22,6 @@ export default function TopNavbar() {
         if (token) {
             getUserByToken(token).then((user) => {
                 setUser(user);
-                console.log(user);
             });
             setLoggedIn(true);
         }

@@ -18,11 +18,10 @@ async function getAllCards() {
     }
 }
 
-async function deleteOneCardById(cardid, userid) {
+async function deleteOneCardById(cardid) {
     try {
         return await cardModel.findOneAndDelete({
             _id: cardid,
-            userId: userid,
         });
     } catch {
         return null;
@@ -50,13 +49,16 @@ async function getOneCardbyUserIDAndCardID(userId, cardId) {
     }
 }
 
-async function updateOneCard(userId, cardId, cardUpdatedData) {
+async function updateCardById(cardid, cardUpdatedData) {
     try {
         const filter = {
-            _id: cardId,
-            userId: userId,
+            _id: cardid,
         };
-        return await cardModel.findByIdAndUpdate(filter, cardUpdatedData);
+        const cardForUpdate = await cardModel.findOneAndUpdate(
+            filter,
+            cardUpdatedData
+        );
+        return cardForUpdate;
     } catch {
         return null;
     }
@@ -68,5 +70,5 @@ module.exports = {
     deleteOneCardById,
     getCardsByUserId,
     getOneCardbyUserIDAndCardID,
-    updateOneCard,
+    updateCardById,
 };

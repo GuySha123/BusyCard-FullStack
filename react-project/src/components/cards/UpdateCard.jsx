@@ -3,6 +3,7 @@ import {
     faImage,
     faLocationDot,
     faMessage,
+    faPenToSquare,
     faPhone,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,30 +12,36 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal';
+import { useNavigate } from 'react-router';
 import urlExist from 'url-exist';
 import '../../assets/styles/cards/CreateCard.css';
 import { UserTokenContext } from '../../context/UserTokenContext';
-import { CreateCardDb } from '../../data/cardStorage';
+import { updateCard } from '../../data/cardStorage';
 
-export default function CreateCardP() {
+export default function UpdateCard({ card }) {
     const [show, setShow] = useState(false);
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
     const [imageInput, setImageInput] = useState('');
     const { token } = useContext(UserTokenContext);
+    const [id, setId] = useState(card._id);
     const [formData, setFormData] = useState({
-        businessName: '',
-        businessDescription: '',
-        businessAddress: '',
-        businessPhone: '',
-        businessImage: 'businessDefaultCardImage',
+        businessName: card.businessName,
+        businessDescription: card.businessDescription,
+        businessAddress: card.businessAdress,
+        businessPhone: card.businessPhone,
+        businessImage: card.businessImage,
         businessCreateDate: `${new Date().toLocaleDateString('en-GB', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
         })}`,
     });
+
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        setShow(true);
+    };
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -116,7 +123,10 @@ export default function CreateCardP() {
             console.log(formData);
             console.log(formData.businessCreateDate);
 
-            CreateCardDb(
+            console.log(token);
+            console.log(id);
+
+            updateCard(
                 {
                     businessName,
                     businessDescription,
@@ -125,7 +135,8 @@ export default function CreateCardP() {
                     businessImage,
                     businessCreateDate,
                 },
-                token
+                token,
+                id
             );
 
             if (imageInput.length === 0) {
@@ -198,6 +209,9 @@ export default function CreateCardP() {
                 throw new Error();
             }
 
+            navigate('/cards');
+            setShow(false);
+
             return console.log('works!');
         } catch (error) {
             return console.log(error);
@@ -206,9 +220,9 @@ export default function CreateCardP() {
 
     return (
         <>
-            <Button variant='primary' onClick={handleShow}>
-                Create Card
-            </Button>
+            <button variant='primary' onClick={handleShow}>
+                <FontAwesomeIcon icon={faPenToSquare}></FontAwesomeIcon>
+            </button>
 
             <Modal
                 show={show}
@@ -236,7 +250,7 @@ export default function CreateCardP() {
                                     type='text'
                                     name='businessName'
                                     size='lg'
-                                    placeholder='Business Name'
+                                    placeholder={card.businessName}
                                     className='position-relative'
                                     aria-describedby='basic-addon1'
                                     value={formData.businessName}
@@ -265,8 +279,7 @@ export default function CreateCardP() {
                                     type='text'
                                     name='businessAddress'
                                     size='lg'
-                                    placeholder='Business Address'
-                                    autoComplete='new-password'
+                                    placeholder={card.businessAdress}
                                     className='position-relative'
                                     value={formData.businessAddress}
                                     onChange={handleChange}
@@ -284,29 +297,6 @@ export default function CreateCardP() {
                                 ))}
                         </Form.Group>
 
-                        {/* <Row className="mb-3">
-                    <Form.Group as={Col} md="5" >
-                    <Form.Control
-                        type="text"
-                        name="firstName"
-                        size="lg"
-                        placeholder="City"
-                        autoComplete="given-name"
-                    />
-
-                    </Form.Group>
-                        <Form.Group as={Col} md="7" >
-                        <Form.Control
-                            type="text"
-                            name="lastName"
-                            size="lg"
-                            placeholder="Address"
-                            autoComplete="family-name"
-                        />
-
-                    </Form.Group>
-                </Row> */}
-
                         <Form.Group className='mb-3'>
                             <InputGroup hasValidation>
                                 <InputGroup.Text id='basic-addon1'>
@@ -318,7 +308,7 @@ export default function CreateCardP() {
                                     type='text'
                                     name='businessPhone'
                                     size='lg'
-                                    placeholder='Business Phone'
+                                    placeholder={card.businessPhone}
                                     className='position-relative'
                                     value={formData.businessPhone}
                                     onChange={handleChange}
@@ -349,7 +339,10 @@ export default function CreateCardP() {
                                     type='text'
                                     name='businessDescription'
                                     size='lg'
-                                    placeholder='Business Description (min 20 characters)'
+                                    placeholder={
+                                        card.businessDescription +
+                                        ' (min 20 characters)'
+                                    }
                                     className='position-relative business-description'
                                     value={formData.businessDescription}
                                     onChange={handleChange}
@@ -380,7 +373,12 @@ export default function CreateCardP() {
                                     type='text'
                                     name='businessImage'
                                     size='lg'
-                                    placeholder='Business Image URL'
+                                    placeholder={
+                                        card.businessImage ===
+                                        'businessDefaultCardImage'
+                                            ? 'Default Card Image'
+                                            : card.businessImage
+                                    }
                                     className='position-relative'
                                     value={imageInput}
                                     onChange={(e) =>
