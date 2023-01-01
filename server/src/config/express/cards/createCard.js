@@ -9,7 +9,7 @@ async function createCard(req, res) {
         return res.status(400).json(result.error.details[0].message);
     }
 
-    req.body.userId = req.userID;
+    req.body.userId = req.userId;
     const cardFromDB = await operations.createCardInMongoDB(req.body);
 
     if (cardFromDB == null) {

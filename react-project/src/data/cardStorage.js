@@ -4,8 +4,8 @@ export async function getCards() {
     return fetch(BASE_URL).then((res) => res.json());
 }
 
-export async function getMyCards(token) {
-    const response = fetch(BASE_URL + '/getmycards', {
+export async function getMyCards(token, id) {
+    const response = await fetch(BASE_URL + '/getmycards?userId=' + id, {
         method: 'GET',
         headers: {
             token: token,
@@ -14,7 +14,7 @@ export async function getMyCards(token) {
     if (!response.ok) {
         throw new Error('An error occurred while fetching the your cards');
     }
-    const cards = await res.json();
+    const cards = await response.json();
 
     return cards;
 }

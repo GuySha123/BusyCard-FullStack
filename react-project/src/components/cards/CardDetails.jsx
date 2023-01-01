@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import businessDefaultCardImage from '../../assets/images/cards/businesscard1015419960720.jpg';
@@ -8,10 +8,11 @@ export default function CardDetails({ card }) {
     const [show, setShow] = useState(false);
     const businessName = card.businessName;
     const businessDescription = card.businessDescription;
-    const businessAddress = card.businessAdress;
+    const businessAddress = card.businessAddress;
     const businessPhone = card.businessPhone;
     const businessImage = card.businessImage;
     const businessCreateDate = card.businessCreateDate;
+    const cardEditor = card.cardEditor;
 
     const handleClose = () => setShow(false);
     const handleShow = () => {
@@ -27,7 +28,6 @@ export default function CardDetails({ card }) {
             <Modal
                 show={show}
                 onHide={handleClose}
-                dialogClassName='modal-100w'
                 aria-labelledby='contained-modal-title-vcenter'
                 centered
             >
@@ -37,23 +37,24 @@ export default function CardDetails({ card }) {
 
                 <Modal.Body>
                     {businessImage === 'businessDefaultCardImage' ? (
-                        <div className='business-image w-60'>
-                            <img src={businessDefaultCardImage}></img>
-                        </div>
+                        <img
+                            className='business-image-watched-card'
+                            src={businessDefaultCardImage}
+                        ></img>
                     ) : (
-                        <div className='business-image w-60'>
-                            <img src={businessImage} alt='Image not found' />
-                        </div>
+                        <img
+                            className='business-image-watched-card'
+                            src={businessImage}
+                            alt='Image not found'
+                        />
                     )}
                     <div className='business-content'>
+                        <p>Last updated: {businessCreateDate}</p>
+                        <p>Card editor: {cardEditor}</p>
+                        <hr></hr>
                         <p className=''>Description: {businessDescription}</p>
                         <p>Phone: {businessPhone}</p>
                         <p>Address: {businessAddress}</p>
-                        <div className='card-footer'>
-                            <small className='text-muted'>
-                                Last updated: {businessCreateDate}
-                            </small>
-                        </div>
                     </div>
                     <Modal.Footer>
                         <Button variant='secondary' onClick={handleClose}>

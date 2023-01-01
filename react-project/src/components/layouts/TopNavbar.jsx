@@ -1,32 +1,19 @@
 import { faUser, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { Stack } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import '../../assets/styles/TopNavbar.css';
 import { LoginContext } from '../../context/LoginContext';
+import { UserInfoContext } from '../../context/UserInfoContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
-import { getUserByToken } from '../../data/storage';
-
-// check how even when remember me is false i can still get the token info
-// make a lazy function to let it reload first
 
 export default function TopNavbar() {
     const [loggedIn, setLoggedIn] = useContext(LoginContext);
-    const { token, setToken } = useContext(UserTokenContext);
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        if (token) {
-            getUserByToken(token).then((user) => {
-                setUser(user);
-            });
-            setLoggedIn(true);
-        }
-    }, [token]);
-    console.log(user);
+    const { setToken } = useContext(UserTokenContext);
+    const { user } = useContext(UserInfoContext);
 
     return (
         <Navbar
@@ -77,7 +64,11 @@ export default function TopNavbar() {
                                 {user ? (
                                     <>
                                         {user.firstName} {user.lastName}
-                                        <a href='#login'>
+                                        <Nav.Link
+                                            as={Link}
+                                            to={'/profile'}
+                                            eventkey='signout'
+                                        >
                                             <FontAwesomeIcon
                                                 icon={
                                                     user.isBusinessAccount
@@ -86,7 +77,7 @@ export default function TopNavbar() {
                                                 }
                                                 className='fa-2x'
                                             ></FontAwesomeIcon>
-                                        </a>
+                                        </Nav.Link>
                                     </>
                                 ) : null}
                             </Stack>

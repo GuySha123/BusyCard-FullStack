@@ -28,9 +28,9 @@ async function deleteOneCardById(cardid) {
     }
 }
 
-async function getCardsByUserId(idOfUSer) {
+async function getCardsByUserId(userId) {
     try {
-        const cardsOfThatUser = await cardModel.find({ userId: idOfUSer });
+        const cardsOfThatUser = await cardModel.find({ userId: userId });
         return cardsOfThatUser;
     } catch {
         return null;

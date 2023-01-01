@@ -7,6 +7,8 @@ const cardSchema = mongoose.Schema({
     businessPhone: String,
     businessImage: String,
     businessCreateDate: String,
+    userId: String,
+    cardEditor: String,
 });
 
 const cardModel = mongoose.model('card', cardSchema);

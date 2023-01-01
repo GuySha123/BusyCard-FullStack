@@ -13,6 +13,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal';
 import urlExist from 'url-exist';
 import '../../assets/styles/cards/CreateCard.css';
+import { UserInfoContext } from '../../context/UserInfoContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
 import { CreateCardDb } from '../../data/cardStorage';
 
@@ -21,6 +22,7 @@ export default function CreateCardP() {
     const [errors, setErrors] = useState({});
     const [imageInput, setImageInput] = useState('');
     const { token } = useContext(UserTokenContext);
+    const { user } = useContext(UserInfoContext);
     const [formData, setFormData] = useState({
         businessName: '',
         businessDescription: '',
@@ -32,6 +34,7 @@ export default function CreateCardP() {
             month: '2-digit',
             year: 'numeric',
         })}`,
+        cardEditor: `${user?.firstName} ${user?.lastName}`,
     });
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -104,6 +107,7 @@ export default function CreateCardP() {
                 businessPhone: businessPhone,
                 businessImage: businessImage,
                 businessCreateDate: businessCreateDate,
+                cardEditor: cardEditor,
             } = formData;
 
             const businessNameError = [];
@@ -124,6 +128,7 @@ export default function CreateCardP() {
                     businessPhone,
                     businessImage,
                     businessCreateDate,
+                    cardEditor,
                 },
                 token
             );

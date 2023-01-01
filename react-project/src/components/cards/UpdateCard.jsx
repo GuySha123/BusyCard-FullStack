@@ -28,7 +28,7 @@ export default function UpdateCard({ card }) {
     const [formData, setFormData] = useState({
         businessName: card.businessName,
         businessDescription: card.businessDescription,
-        businessAddress: card.businessAdress,
+        businessAddress: card.businessAddress,
         businessPhone: card.businessPhone,
         businessImage: card.businessImage,
         businessCreateDate: `${new Date().toLocaleDateString('en-GB', {
@@ -279,7 +279,7 @@ export default function UpdateCard({ card }) {
                                     type='text'
                                     name='businessAddress'
                                     size='lg'
-                                    placeholder={card.businessAdress}
+                                    placeholder={card.businessAddress}
                                     className='position-relative'
                                     value={formData.businessAddress}
                                     onChange={handleChange}

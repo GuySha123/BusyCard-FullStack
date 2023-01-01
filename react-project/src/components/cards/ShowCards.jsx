@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserTokenContext } from '../../context/UserTokenContext';
-import { deleteCard, getMyCardById } from '../../data/cardStorage';
-import { getCards } from '../../data/cardStorage';
+import { deleteCard, getCards } from '../../data/cardStorage';
 import CardsTemplate from './CardsTemplate';
 
 export default function ShowCards() {

@@ -7,6 +7,7 @@ const myCardObject = {
     businessPhone: joi.string().required().min(9).max(12),
     businessImage: joi.string().required().min(20).max(255),
     businessCreateDate: joi.string().required(),
+    cardEditor: joi.string().required().min(5),
 };
 
 const validateCardByJoi = joi.object(myCardObject);

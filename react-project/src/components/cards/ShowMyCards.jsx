@@ -1,26 +1,55 @@
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
+import { UserTokenContext } from '../../context/UserTokenContext';
+import { deleteCard, getMyCards } from '../../data/cardStorage';
 import businessDefaultCardImage from '../../assets/images/cards/businesscard1015419960720.jpg';
-import { UserInfoContext } from '../../context/UserInfoContext';
 import CardDetails from './CardDetails';
 import UpdateCard from './UpdateCard';
+import { UserInfoContext } from '../../context/UserInfoContext';
 
-export default function CardsTemplate({ cards, onDelete }) {
+export default function ShowMyCards() {
+    const [myCards, setMyCards] = useState([]);
+    const { token } = useContext(UserTokenContext);
     const { user } = useContext(UserInfoContext);
+    const userId = user?._id;
 
     const parseDateString = (dateString) => {
         const [day, month, year] = dateString.split('/');
         return new Date(year, month - 1, day);
     };
-    const sortedCards = cards.sort((a, b) => {
+    const sortedCards = myCards.sort((a, b) => {
         const dateA = parseDateString(a.businessCreateDate);
         const dateB = parseDateString(b.businessCreateDate);
         return dateB - dateA;
     });
 
-    if (!cards) <div>No cards</div>;
+    useEffect(() => {
+        reRender();
+    }, []);
+
+    function onDeleteClick(id) {
+        deleteCard(id, token)
+            .then((res) => {
+                reRender();
+            })
+            .catch((error) => console.error(error));
+    }
+
+    function reRender() {
+        getMyCards(token, userId)
+            .then((res) => {
+                console.log(res);
+                setMyCards([...res]);
+            })
+            .catch((error) => console.log(error.message));
+    }
+
+    // Check no cards
+    if (!myCards) {
+        return <div>No cards</div>;
+    }
     const columnsPerRow = 3;
 
     const getColumnsForRow = () => {
@@ -56,16 +85,12 @@ export default function CardsTemplate({ cards, onDelete }) {
                                 <small className='text-muted'>
                                     Card editor: {c.cardEditor}
                                 </small>
-                                {user && user.isAdminAccount ? (
-                                    <>
-                                        <button onClick={() => onDelete(c._id)}>
-                                            <FontAwesomeIcon
-                                                icon={faTrash}
-                                            ></FontAwesomeIcon>
-                                        </button>
-                                        <UpdateCard card={c} />
-                                    </>
-                                ) : null}
+                                <button onClick={() => onDeleteClick(c._id)}>
+                                    <FontAwesomeIcon
+                                        icon={faTrash}
+                                    ></FontAwesomeIcon>
+                                </button>
+                                <UpdateCard card={c} />
                             </div>
                         </Card.Body>
                     </Card>
