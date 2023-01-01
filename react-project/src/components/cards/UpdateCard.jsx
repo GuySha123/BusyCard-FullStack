@@ -402,7 +402,7 @@ export default function UpdateCard({ card }) {
                                 Close
                             </Button>
                             <Button variant='primary' type='submit'>
-                                Create Card
+                                Update Card
                             </Button>
                         </Modal.Footer>
                     </Form>

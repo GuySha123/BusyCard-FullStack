@@ -51,9 +51,6 @@ export async function CreateCardDb(formData, token) {
 }
 
 export async function updateCard(formData, token, id) {
-    console.log(formData);
-    console.log(token);
-    console.log(id);
     const response = await fetch(BASE_URL + '/updatecard?cardid=' + id, {
         method: 'PUT',
         headers: {

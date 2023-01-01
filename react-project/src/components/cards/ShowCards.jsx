@@ -6,7 +6,6 @@ import CardsTemplate from './CardsTemplate';
 
 export default function ShowCards() {
     const [cards, setCards] = useState([]);
-
     const { token } = useContext(UserTokenContext);
 
     useEffect(() => {
