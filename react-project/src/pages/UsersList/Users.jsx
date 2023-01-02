@@ -1,11 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { getUsers, deleteUser } from '../../data/userStorage';
-import SearchUsers from './SearchUsers';
-import UsersList from './UsersList';
-import { LoginContext } from '../../context/LoginContext';
+import React, { useContext, useEffect, useState } from 'react';
+import { UserInfoContext } from '../../context/UserInfoContext';
+import { UserTokenContext } from '../../context/UserTokenContext';
+import { deleteUser, getUsers } from '../../data/userStorage';
+import SearchUsers from '../../components/user-list/SearchUsers';
+import UsersList from '../../components/user-list/UsersList';
 
 export default function Users() {
-    const [loggedIn, setLoggedIn] = useContext(LoginContext);
+    const { token } = useContext(UserTokenContext);
+    const { user } = useContext(UserInfoContext);
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
@@ -45,12 +47,21 @@ export default function Users() {
     }
 
     return (
-        <div className='h-100'>
-            <h2>Users List</h2>
-            <section>
-                <SearchUsers onChange={onSearchChange} />
-                <UsersList users={users} onDelete={onDeleteClick} />
-            </section>
-        </div>
+        <>
+            {!token && !user && !user.isAdminAccount ? (
+                // make it to move to sign in page
+                <div className='h-100'> Please signin </div>
+            ) : (
+                <>
+                    <div className='h-100'>
+                        <h2>Users List</h2>
+                        <section>
+                            <SearchUsers onChange={onSearchChange} />
+                            <UsersList users={users} onDelete={onDeleteClick} />
+                        </section>
+                    </div>
+                </>
+            )}
+        </>
     );
 }

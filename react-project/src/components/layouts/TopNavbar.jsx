@@ -63,7 +63,8 @@ export default function TopNavbar() {
                             <Stack direction='horizontal' gap={3}>
                                 {user ? (
                                     <>
-                                        {user.firstName} {user.lastName}
+                                        hello, <br /> {user.firstName}{' '}
+                                        {user.lastName}
                                         <Nav.Link
                                             as={Link}
                                             to={'/profile'}
