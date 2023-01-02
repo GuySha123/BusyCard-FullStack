@@ -19,19 +19,18 @@ const deleteOneCard = require('../config/express/cards/deleteOneCard');
 const getMyCards = require('../config/express/cards/getMyCards');
 const getMyCardByUserAndCardId = require('../config/express/cards/getMyCardByUserAndCardId');
 const updateCard = require('../config/express/cards/updateCard');
+const updateUser = require('../config/express/customers/updateUserData');
 
 server
     .get('/user', authenticateCustomer, me)
-    .get('/customers', /* authenticateCustomer, */ getAllCustomers)
+    .get('/customers', getAllCustomers)
     .post('/customers/register', registerCustomer)
     .post('/customers/signin', signinCustomer)
-    .get(
-        '/customers/getmydetails',
-        /* authenticateCustomer, */ detailsOfCustomer
-    )
+    .get('/customers/getmydetails', detailsOfCustomer)
+    .put('/customers/updateuser', authenticateCustomer, updateUser)
     .delete('/customers/deletecustomer', deleteOneUser)
     .post('/cards/create', authenticateCustomer, createCard)
-    .get('/cards', /* authenticateCustomer, */ getAllCards)
+    .get('/cards', getAllCards)
     .delete('/cards/deletecard', authenticateCustomer, deleteOneCard)
     .get('/cards/getmycards', authenticateCustomer, getMyCards)
     .get('/cards/getmycardbyid', authenticateCustomer, getMyCardByUserAndCardId)

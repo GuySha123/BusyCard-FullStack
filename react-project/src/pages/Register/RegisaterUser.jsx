@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../../assets/styles/RegisterUser.css';
-import { registerUser } from '../../data/storage';
+import { registerUser } from '../../data/userStorage';
 //Bootstrap
 import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';

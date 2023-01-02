@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../../assets/styles/SignIn.css';
 import { LoginContext } from '../../context/LoginContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
-import { signinUser } from '../../data/storage';
+import { signinUser } from '../../data/userStorage';
 
 export default function SignIn() {
     const [loggedIn, setLoggedIn] = useContext(LoginContext);

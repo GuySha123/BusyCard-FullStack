@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { getUserByToken } from '../data/storage';
+import { getUserByToken } from '../data/userStorage';
 import { LoginContext } from './LoginContext';
 import { UserTokenContext } from './UserTokenContext';
 

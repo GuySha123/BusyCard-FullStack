@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { getUsers, deleteUser } from '../../data/storage';
+import { getUsers, deleteUser } from '../../data/userStorage';
 import SearchUsers from './SearchUsers';
 import UsersList from './UsersList';
 import { LoginContext } from '../../context/LoginContext';

@@ -42,6 +42,21 @@ async function getAllCustomers() {
     }
 }
 
+async function updateUserData(userid, userUpdatedData) {
+    try {
+        const filter = {
+            _id: userid,
+        };
+        const userToUpdate = await customerModel.findOneAndUpdate(
+            filter,
+            userUpdatedData
+        );
+        return userToUpdate;
+    } catch {
+        return null;
+    }
+}
+
 async function deleteOneUserById(userid) {
     try {
         const deleteUser = await customerModel.deleteOne({
@@ -59,4 +74,5 @@ module.exports = {
     getCustomerDetailsById,
     getAllCustomers,
     deleteOneUserById,
+    updateUserData,
 };
