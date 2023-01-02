@@ -17,7 +17,7 @@ import { UserInfoContext } from '../../context/UserInfoContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
 import { CreateCardDb } from '../../data/cardStorage';
 
-export default function CreateCardP() {
+export default function CreateCard() {
     const [show, setShow] = useState(false);
     const [errors, setErrors] = useState({});
     const [imageInput, setImageInput] = useState('');
@@ -211,7 +211,7 @@ export default function CreateCardP() {
 
     return (
         <>
-            <Button variant='primary' onClick={handleShow}>
+            <Button variant='dark' onClick={handleShow}>
                 Create Card
             </Button>
 

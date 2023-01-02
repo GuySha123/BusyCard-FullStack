@@ -15,10 +15,12 @@ import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router';
 import urlExist from 'url-exist';
 import '../../assets/styles/cards/CreateCard.css';
+import { ThemeContext } from '../../context/ThemeContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
 import { updateCard } from '../../data/cardStorage';
 
 export default function UpdateCard({ card }) {
+    const { theme } = useContext(ThemeContext);
     const [show, setShow] = useState(false);
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
@@ -220,7 +222,11 @@ export default function UpdateCard({ card }) {
 
     return (
         <>
-            <button variant='primary' onClick={handleShow}>
+            <button
+                className={`buttons-${theme}`}
+                variant='primary'
+                onClick={handleShow}
+            >
                 <FontAwesomeIcon icon={faPenToSquare}></FontAwesomeIcon>
             </button>
 

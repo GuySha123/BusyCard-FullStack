@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Footer from './components/layouts/Footer';
+import NotFound from './components/layouts/NotFound';
 import TopNavbar from './components/layouts/TopNavbar';
 import Test from './components/_test_/Test';
 import LoginProvider from './context/LoginContext';
@@ -27,13 +28,9 @@ function App() {
                             <Route path='/signin' element={<SignIn />} />
                             <Route path='/register' element={<Register />} />
                             <Route path='/users' element={<Users />} />
-                            <Route path='/cards' element={<Cards />} />
+                            <Route path='/businesscards' element={<Cards />} />
                             <Route path='/profile' element={<Profile />} />
-                            <Route
-                                path='*'
-                                element={<section>Invalid Route</section>}
-                            />
-
+                            <Route path='*' element={<NotFound />} />
                             <Route path='/test' element={<Test />} />
                         </Routes>
 

@@ -1,0 +1,23 @@
+.not-found-container{
+    place-items: center center
+}
+.not-found-content-container{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    min-width: 20.625rem;
+    max-width: 50rem;
+    border: 3px solid black;
+    border-radius: 25px;
+}
+
+.not-found-content>h1{
+    font-size: 6rem;
+}
+.not-found-content>p{
+    font-size: 2rem;
+}
+.not-found-content>button{
+    font-size: 2rem;
+}

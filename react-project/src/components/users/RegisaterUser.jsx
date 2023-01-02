@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import '../../assets/styles/RegisterUser.css';
 import { registerUser } from '../../data/userStorage';
 //Bootstrap
@@ -10,9 +10,11 @@ import Row from 'react-bootstrap/Row';
 //FontAwesome
 import { faUser, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ThemeContext } from '../../context/ThemeContext';
 /*  */
 
 export default function RegisterUser() {
+    const { theme } = useContext(ThemeContext);
     const [errors, setErrors] = useState({});
     const [matchPassword, setMatchPassword] = useState('');
     const [formData, setFormData] = useState({
@@ -148,7 +150,7 @@ export default function RegisterUser() {
     }
 
     return (
-        <Container className='register-user-container d-grid h-100'>
+        <div className={`register-user-container body-${theme} d-grid h-100`}>
             <Form
                 className='register-user-form text-center w-100'
                 onSubmit={handleSubmit}
@@ -165,7 +167,7 @@ export default function RegisterUser() {
                     ></FontAwesomeIcon>
                 )}
 
-                <h1 className='fs-3 fw-normal mb-3'>User</h1>
+                <h1 className='fs-3 fw-normal mb-3'>Create a user</h1>
 
                 <Form.Group className='mb-3'>
                     <Form.Control
@@ -291,6 +293,6 @@ export default function RegisterUser() {
                     </Button>
                 </div>
             </Form>
-        </Container>
+        </div>
     );
 }

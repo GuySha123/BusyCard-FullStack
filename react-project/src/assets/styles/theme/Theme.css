@@ -1,0 +1,141 @@
+/* Dark mode */
+.body-dark {
+    background-color: #18191a !important;
+    color: #f8f9fa !important;
+}
+
+.navbar-footer-dark {
+    background-color: #202226 !important;
+    color: #f8f9fa !important;
+}
+
+.components-dark {
+    background-color: #202226 !important;
+}
+
+.business-cards-dark {
+    background-color: #18191a !important;
+    color: #f8f9fa !important;
+}
+
+.business-cards-image-dark {
+    background-color: #f8f9fa !important;
+}
+
+
+.buttons-dark {
+    background-color: #212529 !important;
+    color: #f8f9fa !important;
+    border: 1px solid  #f8f9fa !important;
+}
+
+.buttons-dark:hover {
+    background-color: #f8f9fa !important;
+    color: #212529 !important;
+    border: 1px solid #f8f9fa !important;
+}
+
+.font-awesome-icon-button-dark {
+    color: #f8f9fa !important;
+}
+.font-awesome-icon-button-dark:hover {
+    color: #212529 !important;
+}
+
+.logo-color-dark {
+    color: #f8f9fa !important;
+}
+
+.logo-color-dark:active {
+    color: #f8f9fa !important;
+}
+
+.logo-color-dark:hover {
+    color: #f8f9fa !important;
+}
+
+.text-dark {
+    color: #f8f9fa !important;
+}
+
+.text-small-dark {
+    color: #ffffff40 !important;
+}
+
+.link-dark {
+    color: #ffffff40 !important;
+}
+
+.link-dark:active {
+    color: #ffffff40 !important;
+}
+
+.link-dark:hover {
+    color: #ffffff8c !important;
+}
+
+.profile-image-dark {
+    border: 2px solid #f8f9fa !important;
+}
+
+/* Light mode */
+.body-light {
+    background-color: #F8F4EA !important;
+    color: #212529 !important;
+}
+
+.navbar-footer-light {
+    background-color: #579BB1 !important;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.components-light {
+    background-color: #F8F4EA !important;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.buttons-light {
+    background-color: #f8f9fa !important;
+    color: #212529 !important;
+    border: 1px solid #212529 !important;
+}
+
+.buttons-light:hover {
+    background-color: #212529 !important;
+    color: #f8f9fa !important;
+    border: 1px solid #212529 !important;
+}
+
+.logo-color-light {
+    color: #212529 !important;
+}
+.logo-color-light:active {
+    color: #212529 !important;
+}
+.logo-color-light:hover {
+    color: #212529 !important;
+}
+
+.text-light {
+    color: #212529 !important;
+}
+
+.text-small-light {
+    color: #292121c0 !important;
+}
+
+.link-light {
+    color:  #292121c0 !important;
+}
+
+.link-light:active {
+    color: #212529c0 !important;
+}
+
+.link-light:hover {
+    color: #212529 !important;
+}
+
+.profile-image-light {
+    border: 2px solid black !important;
+}

@@ -1,0 +1,22 @@
+footer {
+    background-color: #202226;
+}
+
+.fa-facebook,
+.fa-github,
+.fa-linkedin,
+.fa-envelope {
+    color: #f8f9fa ;
+}
+.fa-facebook:hover,
+.fa-github:hover,
+.fa-linkedin:hover,
+.fa-envelope:hover {
+    color: #f8f9fac8 ;
+}
+
+.contact-footer{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}

@@ -2,21 +2,23 @@ import { faUser, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext } from 'react';
 import HandleProfile from '../../components/users/HandleProfile';
+import { ThemeContext } from '../../context/ThemeContext';
 import { UserInfoContext } from '../../context/UserInfoContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
+import SignIn from '../Sginin/SignIn';
 
 export default function Profile() {
+    const { theme } = useContext(ThemeContext);
     const { token } = useContext(UserTokenContext);
     const { user } = useContext(UserInfoContext);
 
     return (
         <>
             {!token && !user ? (
-                // make it to move to sign in page
-                <div className='h-100'> Please signin </div>
+                <SignIn />
             ) : (
                 <>
-                    <div className='h-100'>
+                    <div className={`profile-page body-${theme} h-100`}>
                         <div>
                             <FontAwesomeIcon
                                 icon={

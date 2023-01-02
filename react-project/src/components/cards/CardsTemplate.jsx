@@ -3,11 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import businessDefaultCardImage from '../../assets/images/cards/businesscard1015419960720.jpg';
+import { ThemeContext } from '../../context/ThemeContext';
 import { UserInfoContext } from '../../context/UserInfoContext';
 import CardDetails from './CardDetails';
 import UpdateCard from './UpdateCard';
 
 export default function CardsTemplate({ cards, onDelete }) {
+    const { theme } = useContext(ThemeContext);
     const { user } = useContext(UserInfoContext);
 
     const parseDateString = (dateString) => {
@@ -21,52 +23,72 @@ export default function CardsTemplate({ cards, onDelete }) {
     });
 
     if (!cards) <div>No cards</div>;
-    const columnsPerRow = 3;
 
     const getColumnsForRow = () => {
         let drawCards = sortedCards.map((c, i) => {
             return (
                 <Col key={i}>
-                    <Card style={{ width: '18rem' }} key={c._id}>
+                    <Card
+                        className={`business-card business-cards-${theme}`}
+                        key={c._id}
+                    >
                         {c.businessImage === 'businessDefaultCardImage' ? (
                             <Card.Img
+                                className='business-card-image'
                                 variant='top'
                                 src={businessDefaultCardImage}
                             />
                         ) : (
                             <Card.Img
+                                className={`business-card-image business-cards-image-${theme}`}
                                 variant='top'
                                 src={c.businessImage}
                                 alt='Image not found'
                             />
                         )}
-                        <Card.Body>
-                            <Card.Title>{c.businessName}</Card.Title>
-                            <Card.Text className='col-10 text-truncate'>
-                                {c.businessDescription}
-                            </Card.Text>
-                            <Card.Text>{c.businessPhone}</Card.Text>
-                            <Card.Text>{c.businessAddress}</Card.Text>
-                            <CardDetails card={c} />
-                            <div className='card-footer'>
-                                <small className='text-muted'>
-                                    Last updated: {c.businessCreateDate}
-                                </small>
-                                <br />
-                                <small className='text-muted'>
-                                    Card editor: {c.cardEditor}
-                                </small>
-                                {user && user.isAdminAccount ? (
-                                    <>
-                                        <button onClick={() => onDelete(c._id)}>
-                                            <FontAwesomeIcon
-                                                icon={faTrash}
-                                            ></FontAwesomeIcon>
-                                        </button>
-                                        <UpdateCard card={c} />
-                                    </>
-                                ) : null}
+                        <Card.Body className='p-0'>
+                            <Card.Title className='card-title pt-3 px-3'>
+                                {c.businessName}
+                            </Card.Title>
+                            <hr />
+                            <div className='px-3'>
+                                <Card.Text className='col-10 text-truncate'>
+                                    {c.businessDescription}
+                                </Card.Text>
+                                <Card.Text>{c.businessPhone}</Card.Text>
+                                <Card.Text>{c.businessAddress}</Card.Text>
+                                <CardDetails card={c} />
                             </div>
+                            <Card.Footer className='card-footer w-100'>
+                                <Row>
+                                    <Col lg='8'>
+                                        <small className='text-muted'>
+                                            Last updated: {c.businessCreateDate}
+                                        </small>
+                                        <br />
+                                        <small className='text-muted'>
+                                            Card editor: {c.cardEditor}
+                                        </small>
+                                    </Col>
+                                    {user && user.isAdminAccount ? (
+                                        <>
+                                            <Col lg='4'>
+                                                <button
+                                                    className={`buttons-${theme}`}
+                                                    onClick={() =>
+                                                        onDelete(c._id)
+                                                    }
+                                                >
+                                                    <FontAwesomeIcon
+                                                        icon={faTrash}
+                                                    ></FontAwesomeIcon>
+                                                </button>
+                                                <UpdateCard card={c} />
+                                            </Col>
+                                        </>
+                                    ) : null}
+                                </Row>
+                            </Card.Footer>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -76,7 +98,7 @@ export default function CardsTemplate({ cards, onDelete }) {
     };
 
     return (
-        <Row xs={1} md={columnsPerRow} className='g-4'>
+        <Row xs={1} md={2} xxl={3} className='g-4'>
             {getColumnsForRow()}
         </Row>
     );

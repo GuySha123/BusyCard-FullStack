@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import businessDefaultCardImage from '../../assets/images/cards/businesscard1015419960720.jpg';
 import '../../assets/styles/cards/CreateCard.css';
+import { ThemeContext } from '../../context/ThemeContext';
 
 export default function CardDetails({ card }) {
+    const { theme } = useContext(ThemeContext);
     const [show, setShow] = useState(false);
     const businessName = card.businessName;
     const businessDescription = card.businessDescription;
@@ -21,7 +23,11 @@ export default function CardDetails({ card }) {
 
     return (
         <>
-            <Button className='mb-2' onClick={handleShow}>
+            <Button
+                variant='outline-light'
+                className={`buttons-${theme} mb-2`}
+                onClick={handleShow}
+            >
                 More details
             </Button>
 

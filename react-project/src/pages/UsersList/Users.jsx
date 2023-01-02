@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
+import SearchUsers from '../../components/user-list/SearchUsers';
+import UsersList from '../../components/user-list/UsersList';
+import { ThemeContext } from '../../context/ThemeContext';
 import { UserInfoContext } from '../../context/UserInfoContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
 import { deleteUser, getUsers } from '../../data/userStorage';
-import SearchUsers from '../../components/user-list/SearchUsers';
-import UsersList from '../../components/user-list/UsersList';
+import SignIn from '../Sginin/SignIn';
 
 export default function Users() {
+    const { theme } = useContext(ThemeContext);
     const { token } = useContext(UserTokenContext);
     const { user } = useContext(UserInfoContext);
     const [users, setUsers] = useState([]);
@@ -49,11 +52,10 @@ export default function Users() {
     return (
         <>
             {!token && !user && !user.isAdminAccount ? (
-                // make it to move to sign in page
-                <div className='h-100'> Please signin </div>
+                <SignIn />
             ) : (
                 <>
-                    <div className='h-100'>
+                    <div className={`users-page body-${theme} h-100`}>
                         <h2>Users List</h2>
                         <section>
                             <SearchUsers onChange={onSearchChange} />
