@@ -13,11 +13,13 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal';
 import urlExist from 'url-exist';
 import '../../assets/styles/cards/CreateCard.css';
+import { ThemeContext } from '../../context/ThemeContext';
 import { UserInfoContext } from '../../context/UserInfoContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
 import { CreateCardDb } from '../../data/cardStorage';
 
 export default function CreateCard() {
+    const { theme } = useContext(ThemeContext);
     const [show, setShow] = useState(false);
     const [errors, setErrors] = useState({});
     const [imageInput, setImageInput] = useState('');
@@ -211,7 +213,7 @@ export default function CreateCard() {
 
     return (
         <>
-            <Button variant='dark' onClick={handleShow}>
+            <Button className={`buttons-${theme}`} onClick={handleShow}>
                 Create Card
             </Button>
 
