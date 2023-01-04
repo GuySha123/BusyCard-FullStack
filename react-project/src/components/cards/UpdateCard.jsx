@@ -222,13 +222,9 @@ export default function UpdateCard({ card }) {
 
     return (
         <>
-            <button
-                className={`buttons-${theme}`}
-                variant='primary'
-                onClick={handleShow}
-            >
-                <FontAwesomeIcon icon={faPenToSquare}></FontAwesomeIcon>
-            </button>
+            <div className={`buttons-${theme}`} onClick={handleShow}>
+                Edit Card
+            </div>
 
             <Modal
                 show={show}

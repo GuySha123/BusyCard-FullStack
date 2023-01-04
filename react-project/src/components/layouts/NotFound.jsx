@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../../assets/styles/page-not-found/PageNotFound.css';
 import { Button, Container, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { ThemeContext } from '../../context/ThemeContext';
 
 export default function NotFound() {
+    const { theme } = useContext(ThemeContext);
     return (
-        <Container className='not-found-container d-grid h-100'>
-            <div className='not-found-content-container '>
-                <div className='not-found-content'>
+        <div className={`not-found-container body-${theme} d-grid h-100`}>
+            <div className={`not-found-content-container components-${theme}`}>
+                <div className={`not-found-content `}>
                     <h1>404</h1>
                     <p>The Page you are looking for was not found</p>
-                    <Button className='btn-dark'>
+                    <Button className={`btn-dark`}>
                         <Nav.Link as={Link} to='/' eventkey='home'>
                             Let's go home
                         </Nav.Link>
                     </Button>
                 </div>
             </div>
-        </Container>
+        </div>
     );
 }

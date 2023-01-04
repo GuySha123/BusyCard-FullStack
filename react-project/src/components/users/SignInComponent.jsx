@@ -1,15 +1,16 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react';
-import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginContext } from '../../context/LoginContext';
+import { ThemeContext } from '../../context/ThemeContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
 import { signinUser } from '../../data/userStorage';
 
-export default function SignInUser() {
+export default function SignInComponent() {
+    const { theme } = useContext(ThemeContext);
     const [loggedIn, setLoggedIn] = useContext(LoginContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -21,8 +22,6 @@ export default function SignInUser() {
 
     async function handleSubmit(event) {
         event.preventDefault();
-
-        // Send sign-in request to database, then retrieve token
 
         try {
             setError(null);
@@ -42,11 +41,10 @@ export default function SignInUser() {
             setError('Email/Password incorrect');
             return;
         }
-        // Save token to local storage if "remember me" is checked
     }
 
     return (
-        <Container className='sign-in-container d-grid h-100'>
+        <div className={`sign-in-container body-${theme} d-grid h-100`}>
             <Form
                 onSubmit={handleSubmit}
                 className='sign-in-form text-center w-100'
@@ -97,6 +95,6 @@ export default function SignInUser() {
 
                 <Link to='/register'>Need an Account?</Link>
             </Form>
-        </Container>
+        </div>
     );
 }

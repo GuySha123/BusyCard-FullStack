@@ -1,4 +1,9 @@
-import { faUser, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import {
+    faUser,
+    faUserTie,
+    faSun,
+    faMoon,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useContext } from 'react';
 import { Stack } from 'react-bootstrap';
@@ -13,7 +18,7 @@ import { UserTokenContext } from '../../context/UserTokenContext';
 
 export default function TopNavbar() {
     const [loggedIn, setLoggedIn] = useContext(LoginContext);
-    const { theme } = useContext(ThemeContext);
+    const { theme, changeTheme } = useContext(ThemeContext);
     console.log(theme);
     const { setToken } = useContext(UserTokenContext);
     const { user } = useContext(UserInfoContext);
@@ -22,7 +27,6 @@ export default function TopNavbar() {
         <Navbar
             collapseOnSelect
             expand='lg'
-            /* variant='dark' */
             className={`top-navbar navbar-footer-${theme} p-2 sticky-top`}
         >
             <Navbar.Brand
@@ -106,6 +110,18 @@ export default function TopNavbar() {
                                 Business Cards
                             </Nav.Link>
                         </Nav>
+                        <Nav>
+                            <FontAwesomeIcon
+                                icon={theme === 'light' ? faSun : faMoon}
+                                className={
+                                    theme === 'light'
+                                        ? `fa-2x sun-icon`
+                                        : `fa-2x moon-icon`
+                                }
+                                style={{ cursor: 'pointer' }}
+                                onClick={changeTheme}
+                            />
+                        </Nav>
                         <Nav className=''>
                             <Nav.Link
                                 className={`link-${theme}`}
@@ -168,6 +184,18 @@ export default function TopNavbar() {
                             >
                                 About
                             </Nav.Link>
+                        </Nav>
+                        <Nav>
+                            <FontAwesomeIcon
+                                icon={theme === 'light' ? faSun : faMoon}
+                                className={
+                                    theme === 'light'
+                                        ? `fa-2x sun-icon`
+                                        : `fa-2x moon-icon`
+                                }
+                                style={{ cursor: 'pointer' }}
+                                onClick={changeTheme}
+                            />
                         </Nav>
                         <Nav>
                             <Nav.Link

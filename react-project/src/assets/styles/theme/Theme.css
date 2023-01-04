@@ -26,14 +26,12 @@
 .buttons-dark {
     background-color: #212529 !important;
     color: #f8f9fa !important;
-    border: 1px solid  #f8f9fa !important;
     font-weight: 700 !important;
 }
 
 .buttons-dark:hover {
     background-color: #f8f9fa !important;
     color: #212529 !important;
-    border: 1px solid #f8f9fa !important;
     font-weight: 700 !important;
 }
 
@@ -102,8 +100,12 @@
 }
 
 .business-cards-light {
-    background-color: #eee9db !important;
+    background-color: #fcf2d9 !important;
     color: #212529 !important;
+}
+
+.card-title-container {
+    background: linear-gradient(180deg, rgba(217, 217, 217, 0) 0%, rgba(252, 242, 217, 0.8) 25%);
 }
 
 .business-cards-image-light {
@@ -111,18 +113,15 @@
 }
 
 .buttons-light {
-    background-color: #ECE8DD !important;
+    background-color: #F0DCA7 !important;
+    opacity: 0.7;
     color: #212529 !important;
-    border: 1px solid #212529 !important;
     font-weight: 700 !important;
-    
+    transition: 300ms ease-in-out;
 }
 
 .buttons-light:hover {
-    background-color: #F8F4EA !important;
-    color: #212529 !important;
-    border: 1px solid #212529 !important;
-    font-weight: 700 !important;
+    opacity: 1;
 }
 
 .logo-color-light {
@@ -146,17 +145,21 @@
 }
 
 .link-light {
-    color:  #292121c0 !important;
+    color: #212529 !important;
+    opacity: 0.6;
     font-weight: 700 !important;
 }
 
 .link-light:active {
-    color: #212529c0 !important;
+    color: #212529 !important;
+    opacity: 0.9;
     font-weight: 700 !important;
 }
 
+
 .link-light:hover {
     color: #212529 !important;
+    opacity: 0.9;
     font-weight: 700 !important;
 }
 

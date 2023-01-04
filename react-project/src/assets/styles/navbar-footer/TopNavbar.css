@@ -38,3 +38,24 @@
     height: 100%;
 }
 
+.sun-icon {
+    color: gold;
+}
+.sun-icon:hover {
+    color: gold;
+    animation: spin-animation 1.5s infinite;
+}
+.moon-icon:hover {
+    animation: spin-animation 1.5s infinite;
+}
+
+@keyframes spin-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(359deg);
+    }
+}
+

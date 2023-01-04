@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import ShowCards from '../../components/cards/ShowCards';
+/* import ShowCards from '../../components/cards/ShowCards'; */
 import { ThemeContext } from '../../context/ThemeContext';
 
 export default function Home() {
@@ -7,8 +7,8 @@ export default function Home() {
 
     return (
         <div className={`home-page body-${theme} h-100`}>
-            <h1>Business Cards</h1>
-            <ShowCards />
+            <h1>BusyCard</h1>
+            {/* <ShowCards /> */}
         </div>
     );
 }

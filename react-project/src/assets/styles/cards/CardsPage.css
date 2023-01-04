@@ -5,13 +5,13 @@
 }
 .business-cards-components{
     background-color: #202226;
-    max-width: 65.667vw;
-    min-width: 63.635vw;
+    /* max-width: 65.667vw;
+    min-width: 63.635vw; */
     border-radius: 15px;
 }
 
 /* make it more responsive */
 .business-card-image {
-    max-height: 34.1vh ;
-    min-height: 30.1vh ;
+    /* max-height: 34.1vh ;
+    min-height: 30.1vh ; */
 }

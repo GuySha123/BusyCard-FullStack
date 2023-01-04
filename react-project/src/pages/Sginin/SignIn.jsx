@@ -1,11 +1,11 @@
 import React from 'react';
 import '../../assets/styles/SignIn.css';
-import SignInUser from '../../components/users/signInUser';
+import SignInComponent from '../../components/users/SignInComponent';
 
 export default function SignIn() {
     return (
         <>
-            <SignInUser />
+            <SignInComponent />
         </>
     );
 }

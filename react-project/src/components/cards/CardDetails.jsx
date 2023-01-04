@@ -23,13 +23,12 @@ export default function CardDetails({ card }) {
 
     return (
         <>
-            <Button
-                variant='outline-light'
-                className={`buttons-${theme} mb-2`}
+            <button
+                className={`buttons-${theme} button-control`}
                 onClick={handleShow}
             >
                 More details
-            </Button>
+            </button>
 
             <Modal
                 show={show}

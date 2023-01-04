@@ -1,12 +1,19 @@
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import {
+    faTrash,
+    faEllipsisVertical,
+    faPhone,
+    faLocationDot,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Col, Dropdown, Row } from 'react-bootstrap';
 import businessDefaultCardImage from '../../assets/images/cards/businesscard1015419960720.jpg';
 import { ThemeContext } from '../../context/ThemeContext';
 import { UserInfoContext } from '../../context/UserInfoContext';
 import CardDetails from './CardDetails';
 import UpdateCard from './UpdateCard';
+import '../../assets/styles/cards/Card.css';
+import CardSettings from './CardSettings';
 
 export default function CardsTemplate({ cards, onDelete }) {
     const { theme } = useContext(ThemeContext);
@@ -28,69 +35,102 @@ export default function CardsTemplate({ cards, onDelete }) {
         let drawCards = sortedCards.map((c, i) => {
             return (
                 <Col key={i}>
-                    <Card
-                        className={`business-card business-cards-${theme}`}
+                    {/* Container */}
+                    <div
+                        className={`card-container business-cards-${theme}`}
                         key={c._id}
                     >
+                        {/* Image */}
                         {c.businessImage === 'businessDefaultCardImage' ? (
-                            <Card.Img
-                                className='business-card-image'
-                                variant='top'
+                            <img
+                                className={`card-image`}
                                 src={businessDefaultCardImage}
                             />
                         ) : (
-                            <Card.Img
-                                className={`business-card-image business-cards-image-${theme}`}
+                            <img
+                                className={`card-image business-cards-image-${theme}`}
                                 variant='top'
                                 src={c.businessImage}
                                 alt='Image not found'
                             />
                         )}
-                        <Card.Body className='p-0'>
-                            <Card.Title className='card-title pt-3 px-3'>
-                                {c.businessName}
-                            </Card.Title>
-                            <hr />
-                            <div className='px-3'>
-                                <Card.Text className='col-10 text-truncate'>
-                                    {c.businessDescription}
-                                </Card.Text>
-                                <Card.Text>{c.businessPhone}</Card.Text>
-                                <Card.Text>{c.businessAddress}</Card.Text>
-                                <CardDetails card={c} />
+                        {/* Title */}
+                        <div className={`card-title-container`}>
+                            <div className={`card-title px-3 pt-2`}>
+                                <div className={`business-title`}>
+                                    <h2>{c.businessName}</h2>
+                                    <h3>{c.cardEditor}</h3>
+                                </div>
+                                {/* <div className={`card-settings`}> */}
+                                {/* <FontAwesomeIcon
+                                        icon={faEllipsisVertical}
+                                        className={`card-settings-dot`}
+                                    ></FontAwesomeIcon> */}
+                                <CardSettings card={c} />
+                                {/* </div> */}
                             </div>
-                            <Card.Footer className='card-footer w-100'>
-                                <Row>
-                                    <Col lg='8'>
-                                        <small className='text-muted'>
-                                            Last updated: {c.businessCreateDate}
-                                        </small>
-                                        <br />
-                                        <small className='text-muted'>
-                                            Card editor: {c.cardEditor}
-                                        </small>
-                                    </Col>
-                                    {user && user.isAdminAccount ? (
-                                        <>
-                                            <Col lg='4'>
-                                                <button
-                                                    className={`buttons-${theme}`}
-                                                    onClick={() =>
-                                                        onDelete(c._id)
-                                                    }
-                                                >
-                                                    <FontAwesomeIcon
-                                                        icon={faTrash}
-                                                    ></FontAwesomeIcon>
-                                                </button>
-                                                <UpdateCard card={c} />
-                                            </Col>
-                                        </>
-                                    ) : null}
-                                </Row>
-                            </Card.Footer>
-                        </Card.Body>
-                    </Card>
+                        </div>
+
+                        {/* Content */}
+                        <div className={`card-content px-3`}>
+                            <div className={`text-muted mb-3 `}>
+                                <small>
+                                    Last updated: {c.businessCreateDate}
+                                </small>
+                            </div>
+                            <div className={`col-10 text-truncate mb-2`}>
+                                {c.businessDescription}
+                            </div>
+                            <div className='phone-adress-btn-grid'>
+                                <div className={`phone `}>
+                                    <div className={`phone-adress-icon`}>
+                                        <FontAwesomeIcon
+                                            icon={faPhone}
+                                            className={``}
+                                        ></FontAwesomeIcon>
+                                    </div>
+                                    <div className={`phone-number`}>
+                                        {c.businessPhone}
+                                    </div>
+                                </div>
+                                <div className={`adress`}>
+                                    <div className={`phone-adress-icon`}>
+                                        <FontAwesomeIcon
+                                            icon={faLocationDot}
+                                            className={``}
+                                        ></FontAwesomeIcon>
+                                    </div>
+                                    <div
+                                        className={`adress-info text-truncate`}
+                                    >
+                                        {c.businessAddress}
+                                    </div>
+                                </div>
+
+                                <div className={`get-details-btn `}>
+                                    <CardDetails card={c} />
+                                </div>
+                            </div>
+                        </div>
+                        {/* To card settings */}
+                        {/* <Row>
+                                {user && user.isAdminAccount ? (
+                                    <>
+                                        <Col lg='4'>
+                                            <button
+                                                className={`buttons-${theme}`}
+                                                onClick={() => onDelete(c._id)}
+                                            >
+                                                <FontAwesomeIcon
+                                                    icon={faTrash}
+                                                ></FontAwesomeIcon>
+                                            </button>
+                                            <UpdateCard card={c} />
+                                        </Col>
+                                    </>
+                                ) : null}
+                            </Row> */}
+                    </div>
                 </Col>
             );
         });
@@ -98,7 +138,7 @@ export default function CardsTemplate({ cards, onDelete }) {
     };
 
     return (
-        <Row xs={1} md={2} xxl={3} className='g-4'>
+        <Row xs={1} md={1} xxl={2} className='g-4'>
             {getColumnsForRow()}
         </Row>
     );

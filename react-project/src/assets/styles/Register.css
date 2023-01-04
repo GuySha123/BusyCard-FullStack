@@ -2,12 +2,12 @@
     place-items: center center;
 }
 .register-choice{
-    color: #212529!important;
-    display: flex!important;
+    
+    display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid black;
-    border-radius: 5%!important;
-    width: 100px !important;
-    height: 200px !important;
+    border-radius: 5%;
+    width: 100px ;
+    height: 200px ;
 }
