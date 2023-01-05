@@ -1,0 +1,72 @@
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+
+@media screen and (max-width: 576px) {
+    .page-content-container {
+        width: 95vw;
+    }
+}
+@media screen and (min-width: 576px) {
+    .page-content-container {
+        width: 80vw;
+    }
+}
+
+@media screen and (min-width: 1900px) {
+    .page-content-container {
+        width: 95vw;
+    }
+}
+
+/* Title section */
+
+.page-title-area {
+    display: flex;
+    margin: auto;
+    width: 70vw;
+    border-radius: 20px;
+    height: 5rem;
+}
+
+@media screen and (max-width: 576px) {
+    .page-title-area {
+        width: 95vw;
+    }
+}
+
+.title-grid-holder {
+    display: grid;
+
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(10.875rem, 100vw) 1fr;
+}
+
+.page-title{
+    display: grid;
+    align-content: center;
+}
+
+.title-btn-area{
+    display: grid;
+    align-content: center;
+}
+/* Title section END */
+
+/* Cards section */
+.cards-area-grid {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(22rem, 34.4rem));
+}
+/* Cards section END*/
+
+
+
+
+

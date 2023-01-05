@@ -1,0 +1,35 @@
+.dropdown-menu-custom {
+    position: absolute;
+    top: 1.25rem;
+    right: 2.5rem;
+    border-radius: 10px;
+    width: 12.5rem;
+    font-size: 1.2em;
+    
+}
+
+.dropdown-menu-custom.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    transition: 700ms ease;
+}
+.dropdown-menu-custom.inactive {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: 700ms ease;
+}
+
+.dropdown-menu-custom>ul {
+    text-align: center;
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+}
+
+.dropdown-item-custom {
+    padding: 10px 0 10px 0;
+}

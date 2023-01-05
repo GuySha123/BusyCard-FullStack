@@ -1,0 +1,48 @@
+.profile-info-area {
+    display: flex;
+    margin: auto;
+    width: 70vw;
+    border-radius: 15px;
+    height: 20rem;
+}
+
+@media screen and (max-width: 576px) {
+    .profile-info-area {
+        width: 95vw;
+    }
+}
+
+.profile-grid-holder {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(9rem, 100vw) 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.profile-grid-holder {
+    display: grid;
+    align-content: center;
+}
+
+.profile-picture-container {
+    width: 7.5rem;
+    height: 7.5rem;
+    border-radius: 50%;
+}
+
+.my-cards-title {
+    display: grid;
+    align-content: center;
+}
+
+.profile-user-info{
+    display: grid;
+    align-content: center;
+}
+
+
+.profile-btn-area {
+    display: grid;
+    align-content: center;
+    grid-row: 3;
+}

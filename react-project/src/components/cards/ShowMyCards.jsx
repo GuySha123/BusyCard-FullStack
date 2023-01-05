@@ -1,18 +1,25 @@
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import {
+    faEllipsisVertical,
+    faLocationDot,
+    faPhone,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useEffect, useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import businessDefaultCardImage from '../../assets/images/cards/businesscard1015419960720.jpg';
+import { ThemeContext } from '../../context/ThemeContext';
+import { UserInfoContext } from '../../context/UserInfoContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
 import { deleteCard, getMyCards } from '../../data/cardStorage';
-import businessDefaultCardImage from '../../assets/images/cards/businesscard1015419960720.jpg';
 import CardDetails from './CardDetails';
-import UpdateCard from './UpdateCard';
-import { UserInfoContext } from '../../context/UserInfoContext';
+import CardSettingsDropdown from './CardSettingsDropdown';
 
 export default function ShowMyCards() {
     const [myCards, setMyCards] = useState([]);
     const { token } = useContext(UserTokenContext);
+    const { theme } = useContext(ThemeContext);
     const { user } = useContext(UserInfoContext);
+    const [open, setOpen] = useState(false);
+    const [openId, setOpenId] = useState(null);
     const userId = user?._id;
 
     const parseDateString = (dateString) => {
@@ -46,63 +53,112 @@ export default function ShowMyCards() {
             .catch((error) => console.log(error.message));
     }
 
-    // Check no cards
     if (!myCards) {
         return <div>No cards</div>;
     }
-    const columnsPerRow = 3;
 
     const getColumnsForRow = () => {
         let drawCards = sortedCards.map((c, i) => {
             return (
-                <Col key={i}>
-                    <Card style={{ width: '18rem' }} key={c._id}>
-                        {c.businessImage === 'businessDefaultCardImage' ? (
-                            <Card.Img
-                                variant='top'
-                                src={businessDefaultCardImage}
-                            />
-                        ) : (
-                            <Card.Img
-                                variant='top'
-                                src={c.businessImage}
-                                alt='Image not found'
-                            />
-                        )}
-                        <Card.Body>
-                            <Card.Title>{c.businessName}</Card.Title>
-                            <Card.Text className='col-10 text-truncate'>
-                                {c.businessDescription}
-                            </Card.Text>
-                            <Card.Text>{c.businessPhone}</Card.Text>
-                            <Card.Text>{c.businessAddress}</Card.Text>
-                            <CardDetails card={c} />
-                            <div className='card-footer'>
-                                <small className='text-muted'>
+                <div key={i} className={`cards-col`}>
+                    {/* Container */}
+                    <div
+                        className={`card-container business-cards-${theme}`}
+                        key={c._id}
+                    >
+                        {/* Image */}
+                        <div
+                            className={`card-image business-cards-image-${theme}`}
+                            style={{
+                                backgroundImage: `url(${
+                                    c.businessImage ===
+                                    'businessDefaultCardImage'
+                                        ? businessDefaultCardImage
+                                        : c.businessImage
+                                })`,
+                            }}
+                        ></div>
+                        {/* Title */}
+                        <div className={`card-title-container`}>
+                            <div className={`card-title ps-3 pe-1 pt-2`}>
+                                <div className={`business-title`}>
+                                    <h2>{c.businessName}</h2>
+                                    <h3>{c.cardEditor}</h3>
+                                </div>
+                                <div className={`card-settings`}>
+                                    <div
+                                        className={`menu-trigger`}
+                                        onClick={() => {
+                                            setOpen(!open);
+                                            setOpenId(i);
+                                        }}
+                                    >
+                                        <FontAwesomeIcon
+                                            icon={faEllipsisVertical}
+                                            className={`card-settings-dot`}
+                                        ></FontAwesomeIcon>
+                                    </div>
+                                    <div
+                                        className={`dropdown-menu-custom  dropdown-menu-box-${theme}  ${
+                                            open && openId === i
+                                                ? 'active'
+                                                : 'inactive'
+                                        } `}
+                                    >
+                                        <ul>
+                                            <CardSettingsDropdown
+                                                card={c}
+                                                onDelete={onDeleteClick}
+                                            />
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Content */}
+                        <div className={`card-content `}>
+                            <div className={`last-updated mx-2`}>
+                                <small>
                                     Last updated: {c.businessCreateDate}
                                 </small>
-                                <br />
-                                <small className='text-muted'>
-                                    Card editor: {c.cardEditor}
-                                </small>
-                                <button onClick={() => onDeleteClick(c._id)}>
-                                    <FontAwesomeIcon
-                                        icon={faTrash}
-                                    ></FontAwesomeIcon>
-                                </button>
-                                <UpdateCard card={c} />
                             </div>
-                        </Card.Body>
-                    </Card>
-                </Col>
+                            <div className={`description my-2 mx-2`}>
+                                {c.businessDescription}
+                            </div>
+
+                            <div className={`phone my-2`}>
+                                <div className={`phone-adress-icon`}>
+                                    <FontAwesomeIcon
+                                        icon={faPhone}
+                                        className={``}
+                                    ></FontAwesomeIcon>
+                                </div>
+                                <div className={`phone-number`}>
+                                    {c.businessPhone}
+                                </div>
+                            </div>
+                            <div className={`adress mb-2`}>
+                                <div className={`phone-adress-icon`}>
+                                    <FontAwesomeIcon
+                                        icon={faLocationDot}
+                                        className={``}
+                                    ></FontAwesomeIcon>
+                                </div>
+                                <div className={`adress-info`}>
+                                    {c.businessAddress}
+                                </div>
+                            </div>
+                            <div className={`get-details-btn me-2`}>
+                                <CardDetails card={c} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             );
         });
         return drawCards;
     };
 
-    return (
-        <Row xs={1} md={columnsPerRow} className='g-4'>
-            {getColumnsForRow()}
-        </Row>
-    );
+    return <div className={`cards-area-grid`}>{getColumnsForRow()}</div>;
 }

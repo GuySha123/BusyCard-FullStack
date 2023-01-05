@@ -213,9 +213,12 @@ export default function CreateCard() {
 
     return (
         <>
-            <Button className={`buttons-${theme}`} onClick={handleShow}>
+            <button
+                className={`buttons-${theme} button-control`}
+                onClick={handleShow}
+            >
                 Create Card
-            </Button>
+            </button>
 
             <Modal
                 show={show}
@@ -290,30 +293,6 @@ export default function CreateCard() {
                                     </div>
                                 ))}
                         </Form.Group>
-
-                        {/* <Row className="mb-3">
-                    <Form.Group as={Col} md="5" >
-                    <Form.Control
-                        type="text"
-                        name="firstName"
-                        size="lg"
-                        placeholder="City"
-                        autoComplete="given-name"
-                    />
-
-                    </Form.Group>
-                        <Form.Group as={Col} md="7" >
-                        <Form.Control
-                            type="text"
-                            name="lastName"
-                            size="lg"
-                            placeholder="Address"
-                            autoComplete="family-name"
-                        />
-
-                    </Form.Group>
-                </Row> */}
-
                         <Form.Group className='mb-3'>
                             <InputGroup hasValidation>
                                 <InputGroup.Text id='basic-addon1'>

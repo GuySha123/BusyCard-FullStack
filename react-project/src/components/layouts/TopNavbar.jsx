@@ -37,6 +37,17 @@ export default function TopNavbar() {
             >
                 Busycard
             </Navbar.Brand>
+
+            <Nav className='d-block d-lg-none mt-1'>
+                <FontAwesomeIcon
+                    icon={theme === 'light' ? faSun : faMoon}
+                    className={
+                        theme === 'light' ? `fa-2x sun-icon` : `fa-2x moon-icon`
+                    }
+                    style={{ cursor: 'pointer' }}
+                    onClick={changeTheme}
+                />
+            </Nav>
             <Navbar.Toggle aria-controls='responsive-navbar-nav' />
 
             <Navbar.Collapse id='responsive-navbar-nav' className='ms-auto'>
@@ -110,13 +121,13 @@ export default function TopNavbar() {
                                 Business Cards
                             </Nav.Link>
                         </Nav>
-                        <Nav>
+                        <Nav className='d-none d-lg-block'>
                             <FontAwesomeIcon
                                 icon={theme === 'light' ? faSun : faMoon}
                                 className={
                                     theme === 'light'
-                                        ? `fa-2x sun-icon`
-                                        : `fa-2x moon-icon`
+                                        ? `fa-2x sun-icon me-2`
+                                        : `fa-2x moon-icon me-2`
                                 }
                                 style={{ cursor: 'pointer' }}
                                 onClick={changeTheme}
@@ -185,13 +196,14 @@ export default function TopNavbar() {
                                 About
                             </Nav.Link>
                         </Nav>
-                        <Nav>
+
+                        <Nav className='d-none d-lg-block'>
                             <FontAwesomeIcon
                                 icon={theme === 'light' ? faSun : faMoon}
                                 className={
                                     theme === 'light'
-                                        ? `fa-2x sun-icon`
-                                        : `fa-2x moon-icon`
+                                        ? `fa-2x sun-icon me-2`
+                                        : `fa-2x moon-icon me-2`
                                 }
                                 style={{ cursor: 'pointer' }}
                                 onClick={changeTheme}

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import businessDefaultCardImage from '../../assets/images/cards/businesscard1015419960720.jpg';
-import '../../assets/styles/cards/CreateCard.css';
+
 import { ThemeContext } from '../../context/ThemeContext';
 
 export default function CardDetails({ card }) {

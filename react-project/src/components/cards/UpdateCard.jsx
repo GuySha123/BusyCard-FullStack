@@ -222,8 +222,12 @@ export default function UpdateCard({ card }) {
 
     return (
         <>
-            <div className={`buttons-${theme}`} onClick={handleShow}>
-                Edit Card
+            <div
+                className={`dropdown-item-custom dropdown-item-custom-${theme}`}
+                onClick={handleShow}
+                style={{ cursor: 'pointer' }}
+            >
+                Update card
             </div>
 
             <Modal

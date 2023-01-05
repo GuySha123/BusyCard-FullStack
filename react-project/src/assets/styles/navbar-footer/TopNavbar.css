@@ -10,11 +10,22 @@
     text-align: center;
 }
 
+.profile-picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+
+
 .profile-picture-large {
     width: 3.2rem;
     height: 3.2rem;
     border-radius: 50%;
 }
+
+
 
 .user-top-navbar-area-large>.profile-picture-large>.nav-link {
     display: flex;

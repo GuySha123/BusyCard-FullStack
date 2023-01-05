@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-
 import { UserTokenContext } from '../../context/UserTokenContext';
 import { deleteCard, getCards } from '../../data/cardStorage';
 import CardsTemplate from './CardsTemplate';
@@ -31,9 +30,7 @@ export default function ShowCards() {
 
     return (
         <>
-            <div className='show-cards' id='cards'>
-                <CardsTemplate cards={cards} onDelete={onDeleteClick} />
-            </div>
+            <CardsTemplate cards={cards} onDelete={onDeleteClick} />
         </>
     );
 }

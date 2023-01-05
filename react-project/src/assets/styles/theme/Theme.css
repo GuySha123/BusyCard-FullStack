@@ -95,7 +95,7 @@
 }
 
 .components-light {
-    background-color: #F8F4EA !important;
+    background-color: #fcf2d9 !important;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
@@ -121,6 +121,23 @@
 }
 
 .buttons-light:hover {
+    opacity: 1;
+}
+
+.dropdown-menu-box-light {
+    background-color: #F0DCA7
+}
+
+.dropdown-item-custom-light {
+    color: #212529 !important;
+    font-weight: 600 !important;
+    opacity: 0.7;
+}
+
+.dropdown-item-custom:hover {
+    background-color: #eace81 !important;
+    transition: 300ms ease-in-out;
+    font-weight: 700 !important;
     opacity: 1;
 }
 

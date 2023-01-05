@@ -1,5 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import './assets/styles/cards/Card.css';
+import './assets/styles/cards/CardSetting.css';
+import './assets/styles/pages/Pages.css';
 import Footer from './components/layouts/Footer';
 import NotFound from './components/layouts/NotFound';
 import TopNavbar from './components/layouts/TopNavbar';
