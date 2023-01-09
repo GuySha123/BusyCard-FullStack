@@ -7,20 +7,24 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import { CloseButton } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal';
+import { useNavigate } from 'react-router';
 import urlExist from 'url-exist';
 import '../../assets/styles/cards/CreateCard.css';
 import { ThemeContext } from '../../context/ThemeContext';
 import { UserInfoContext } from '../../context/UserInfoContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
 import { CreateCardDb } from '../../data/cardStorage';
+import CreatedCardMsg from '../messages/CreatedCardMsg';
 
 export default function CreateCard() {
     const { theme } = useContext(ThemeContext);
     const [show, setShow] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const navigate = useNavigate();
     const [errors, setErrors] = useState({});
     const [imageInput, setImageInput] = useState('');
     const { token } = useContext(UserTokenContext);
@@ -35,11 +39,23 @@ export default function CreateCard() {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
         })}`,
         cardEditor: `${user?.firstName} ${user?.lastName}`,
     });
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handleCloseConfirm = () => {
+        setShowConfirm(false);
+        navigate('/businesscards');
+    };
+    const handleShowConfirm = () => {
+        setShowConfirm(true);
+        handleClose();
+        setTimeout(handleCloseConfirm, 3000);
+    };
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -120,7 +136,6 @@ export default function CreateCard() {
             const newErrors = {};
 
             console.log(formData);
-            console.log(formData.businessCreateDate);
 
             CreateCardDb(
                 {
@@ -205,7 +220,7 @@ export default function CreateCard() {
                 throw new Error();
             }
 
-            return console.log('works!');
+            handleShowConfirm();
         } catch (error) {
             return console.log(error);
         }
@@ -226,18 +241,24 @@ export default function CreateCard() {
                 backdrop='static'
                 keyboard={false}
                 size='lg'
-                aria-labelledby='contained-modal-title-vcenter'
                 centered
             >
-                <Modal.Header closeButton>
-                    <Modal.Title>Create A Card</Modal.Title>
-                </Modal.Header>
-
-                <Modal.Body>
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group className='mb-3'>
+                <Modal.Body className={`components-${theme} form-container`}>
+                    <Modal.Title className={`form-title mb-2`}>
+                        Create A Card
+                    </Modal.Title>
+                    <CloseButton
+                        className={`form-close-x`}
+                        aria-label='Hide'
+                        onClick={handleClose}
+                    />
+                    <Form
+                        className={`form-inputs-group`}
+                        onSubmit={handleSubmit}
+                    >
+                        <Form.Group className={`form-inputs mb-3`}>
                             <InputGroup hasValidation>
-                                <InputGroup.Text id='basic-addon1'>
+                                <InputGroup.Text>
                                     <FontAwesomeIcon
                                         icon={faBriefcase}
                                     ></FontAwesomeIcon>
@@ -247,8 +268,6 @@ export default function CreateCard() {
                                     name='businessName'
                                     size='lg'
                                     placeholder='Business Name'
-                                    className='position-relative'
-                                    aria-describedby='basic-addon1'
                                     value={formData.businessName}
                                     onChange={handleChange}
                                 />
@@ -264,9 +283,9 @@ export default function CreateCard() {
                                 ))}
                         </Form.Group>
 
-                        <Form.Group className='mb-3'>
+                        <Form.Group className={`form-inputs mb-3`}>
                             <InputGroup hasValidation>
-                                <InputGroup.Text id='basic-addon1'>
+                                <InputGroup.Text>
                                     <FontAwesomeIcon
                                         icon={faLocationDot}
                                     ></FontAwesomeIcon>
@@ -276,8 +295,6 @@ export default function CreateCard() {
                                     name='businessAddress'
                                     size='lg'
                                     placeholder='Business Address'
-                                    autoComplete='new-password'
-                                    className='position-relative'
                                     value={formData.businessAddress}
                                     onChange={handleChange}
                                 />
@@ -293,9 +310,9 @@ export default function CreateCard() {
                                     </div>
                                 ))}
                         </Form.Group>
-                        <Form.Group className='mb-3'>
+                        <Form.Group className={`form-inputs mb-3`}>
                             <InputGroup hasValidation>
-                                <InputGroup.Text id='basic-addon1'>
+                                <InputGroup.Text>
                                     <FontAwesomeIcon
                                         icon={faPhone}
                                     ></FontAwesomeIcon>
@@ -305,7 +322,6 @@ export default function CreateCard() {
                                     name='businessPhone'
                                     size='lg'
                                     placeholder='Business Phone'
-                                    className='position-relative'
                                     value={formData.businessPhone}
                                     onChange={handleChange}
                                 />
@@ -322,9 +338,9 @@ export default function CreateCard() {
                                 ))}
                         </Form.Group>
 
-                        <Form.Group className='mb-3'>
+                        <Form.Group className={`form-inputs mb-3`}>
                             <InputGroup hasValidation>
-                                <InputGroup.Text id='basic-addon1'>
+                                <InputGroup.Text>
                                     <FontAwesomeIcon
                                         icon={faMessage}
                                     ></FontAwesomeIcon>
@@ -336,7 +352,7 @@ export default function CreateCard() {
                                     name='businessDescription'
                                     size='lg'
                                     placeholder='Business Description (min 20 characters)'
-                                    className='position-relative business-description'
+                                    className={`business-description`}
                                     value={formData.businessDescription}
                                     onChange={handleChange}
                                 />
@@ -355,9 +371,9 @@ export default function CreateCard() {
                                 )}
                         </Form.Group>
 
-                        <Form.Group className='mb-3'>
+                        <Form.Group className={`form-inputs mb-3`}>
                             <InputGroup hasValidation>
-                                <InputGroup.Text id='basic-addon1'>
+                                <InputGroup.Text>
                                     <FontAwesomeIcon
                                         icon={faImage}
                                     ></FontAwesomeIcon>
@@ -367,7 +383,6 @@ export default function CreateCard() {
                                     name='businessImage'
                                     size='lg'
                                     placeholder='Business Image URL'
-                                    className='position-relative'
                                     value={imageInput}
                                     onChange={(e) =>
                                         setImageInput(e.target.value)
@@ -385,17 +400,29 @@ export default function CreateCard() {
                                     </div>
                                 ))}
                         </Form.Group>
-                        <Modal.Footer>
-                            <Button variant='secondary' onClick={handleClose}>
+                        <div className={`form-btn`}>
+                            <button
+                                type='reset'
+                                onClick={handleClose}
+                                className={`buttons-${theme} button-control me-3`}
+                            >
                                 Close
-                            </Button>
-                            <Button variant='primary' type='submit'>
+                            </button>
+                            <button
+                                type='submit'
+                                className={`buttons-${theme} button-control`}
+                            >
                                 Create Card
-                            </Button>
-                        </Modal.Footer>
+                            </button>
+                        </div>
                     </Form>
                 </Modal.Body>
             </Modal>
+
+            <CreatedCardMsg
+                showConfirm={showConfirm}
+                handleCloseConfirm={handleCloseConfirm}
+            />
         </>
     );
 }

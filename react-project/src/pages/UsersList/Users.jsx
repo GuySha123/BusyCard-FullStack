@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import SearchUsers from '../../components/user-list/SearchUsers';
+/* import SearchUsers from '../../components/user-list/SearchUsers'; */
 import UsersList from '../../components/user-list/UsersList';
 import { ThemeContext } from '../../context/ThemeContext';
 import { UserInfoContext } from '../../context/UserInfoContext';
@@ -17,7 +17,7 @@ export default function Users() {
         reRender();
     }, []);
 
-    function onSearchChange(text, searchChoice, searchUserType) {
+    function onSearchChange(text /* , searchChoice, searchUserType */) {
         getUsers()
             .then((userJSON) => {
                 let tus = userJSON.filter((u) => {
@@ -55,12 +55,17 @@ export default function Users() {
                 <SignIn />
             ) : (
                 <>
-                    <div className={`users-page body-${theme} h-100`}>
-                        <h2>Users List</h2>
-                        <section>
-                            <SearchUsers onChange={onSearchChange} />
-                            <UsersList users={users} onDelete={onDeleteClick} />
-                        </section>
+                    <div className={`page-container body-${theme} h-100`}>
+                        <div className={`page-content-container my-4`}>
+                            <h1 className={'m-0'}>Users List</h1>
+                            <section>
+                                {/* <SearchUsers onChange={onSearchChange} /> */}
+                                <UsersList
+                                    users={users}
+                                    onDelete={onDeleteClick}
+                                />
+                            </section>
+                        </div>
                     </div>
                 </>
             )}

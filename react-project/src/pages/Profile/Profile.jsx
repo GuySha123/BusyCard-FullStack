@@ -36,7 +36,7 @@ export default function Profile() {
                                                         ? faUserTie
                                                         : faUser
                                                 }
-                                                className={`profile-image text-${theme} fa-5x`}
+                                                className={`profile-image fa-5x`}
                                             ></FontAwesomeIcon>
                                         </div>
                                     </div>
@@ -57,7 +57,11 @@ export default function Profile() {
                                     </div>
                                 </div>
                             </div>
-                            <ShowMyCards user={user} />
+                            {user.isBusinessAccount ? (
+                                <ShowMyCards user={user} />
+                            ) : (
+                                <></>
+                            )}
                         </div>
                     </div>
                 </>

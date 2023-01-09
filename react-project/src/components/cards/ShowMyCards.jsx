@@ -23,8 +23,10 @@ export default function ShowMyCards() {
     const userId = user?._id;
 
     const parseDateString = (dateString) => {
-        const [day, month, year] = dateString.split('/');
-        return new Date(year, month - 1, day);
+        const [date, time] = dateString.split(', ');
+        const [day, month, year] = date.split('/');
+        const [hour, minute, second] = time.split(':');
+        return new Date(year, month - 1, day, hour, minute, second);
     };
     const sortedCards = myCards.sort((a, b) => {
         const dateA = parseDateString(a.businessCreateDate);
@@ -53,8 +55,19 @@ export default function ShowMyCards() {
             .catch((error) => console.log(error.message));
     }
 
-    if (!myCards) {
-        return <div>No cards</div>;
+    if (myCards.length == 0) {
+        return (
+            <div className={`not-found-container body-${theme} d-grid `}>
+                <div
+                    className={`not-found-content-container components-${theme}`}
+                >
+                    <div className={`not-found-content `}>
+                        <h1>No Cards</h1>
+                        <p>Time to create a new Card!</p>
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     const getColumnsForRow = () => {
@@ -79,7 +92,9 @@ export default function ShowMyCards() {
                             }}
                         ></div>
                         {/* Title */}
-                        <div className={`card-title-container`}>
+                        <div
+                            className={`card-title-container card-title-container-${theme}`}
+                        >
                             <div className={`card-title ps-3 pe-1 pt-2`}>
                                 <div className={`business-title`}>
                                     <h2>{c.businessName}</h2>

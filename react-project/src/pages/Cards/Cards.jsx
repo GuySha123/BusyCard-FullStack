@@ -17,7 +17,6 @@ export default function Cards() {
                 <SignIn />
             ) : (
                 <>
-                    {/* body-${theme} */}
                     <div className={`page-container body-${theme} h-100`}>
                         <div className={`page-content-container my-4`}>
                             <div
@@ -25,7 +24,7 @@ export default function Cards() {
                             >
                                 <div className={`title-grid-holder ms-3`}>
                                     <div className={'page-title'}>
-                                        <h1>Cards</h1>
+                                        <h1 className={'m-0'}>Cards</h1>
                                     </div>
                                     <div className={'title-btn-area me-3'}>
                                         <CreateCard />

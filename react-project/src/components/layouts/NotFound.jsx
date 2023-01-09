@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import '../../assets/styles/page-not-found/PageNotFound.css';
-import { Button, Container, Nav } from 'react-bootstrap';
+import { Button, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import '../../assets/styles/page-not-found/PageNotFound.css';
 import { ThemeContext } from '../../context/ThemeContext';
 
 export default function NotFound() {

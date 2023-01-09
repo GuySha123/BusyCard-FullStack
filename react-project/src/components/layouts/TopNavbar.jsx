@@ -19,7 +19,6 @@ import { UserTokenContext } from '../../context/UserTokenContext';
 export default function TopNavbar() {
     const [loggedIn, setLoggedIn] = useContext(LoginContext);
     const { theme, changeTheme } = useContext(ThemeContext);
-    console.log(theme);
     const { setToken } = useContext(UserTokenContext);
     const { user } = useContext(UserInfoContext);
 
@@ -48,9 +47,12 @@ export default function TopNavbar() {
                     onClick={changeTheme}
                 />
             </Nav>
-            <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+            <Navbar.Toggle
+                aria-controls='responsive-navbar-nav'
+                className={` humburger-${theme}`}
+            />
 
-            <Navbar.Collapse id='responsive-navbar-nav' className='ms-auto'>
+            <Navbar.Collapse id='responsive-navbar-nav' className={`ms-auto`}>
                 {loggedIn ? (
                     <>
                         <Navbar.Text className='d-block d-lg-none'>
@@ -203,7 +205,7 @@ export default function TopNavbar() {
                                 className={
                                     theme === 'light'
                                         ? `fa-2x sun-icon me-2`
-                                        : `fa-2x moon-icon me-2`
+                                        : `fa-2x moon-icon me-2 text-${theme}`
                                 }
                                 style={{ cursor: 'pointer' }}
                                 onClick={changeTheme}

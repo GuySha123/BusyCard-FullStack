@@ -4,7 +4,6 @@ const userOperations = require('../../mongoDB/customerOperations');
 async function updateUser(req, res) {
     const userid = req.query.userid;
     const dataToUpdateUser = req.body;
-    /* console.log(userid); */
 
     if (!dataToUpdateUser)
         return res.status(400).json('Please provide info to update');

@@ -13,6 +13,4 @@ function validateRegisterCustomer(customer) {
     return schema.validate(customer);
 }
 
-console.log(validateRegisterCustomer);
-
 module.exports = validateRegisterCustomer;

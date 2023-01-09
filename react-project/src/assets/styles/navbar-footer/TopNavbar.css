@@ -51,16 +51,24 @@
 
 .sun-icon {
     color: gold;
-}
-.sun-icon:hover {
-    color: gold;
-    animation: spin-animation 1.5s infinite;
-}
-.moon-icon:hover {
-    animation: spin-animation 1.5s infinite;
+    animation: spin-animation-sun 1.5s 1;
 }
 
-@keyframes spin-animation {
+.moon-icon {
+    color: #F8F4EA;
+    animation: spin-animation-moon 1.5s 1;
+}
+
+@keyframes spin-animation-sun {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(359deg);
+    }
+}
+@keyframes spin-animation-moon {
     0% {
         transform: rotate(0deg);
     }

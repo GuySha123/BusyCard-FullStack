@@ -54,14 +54,14 @@ export default function SignInComponent() {
                     className='fa-5x'
                 ></FontAwesomeIcon>
                 <h1 className='fs-3 fw-normal mb-3'>Please sign in</h1>
-                <Form.Group controlId='sign-in-email-address'>
+                <Form.Group controlId='sign-in-email-address text-input'>
                     <Form.Control
                         htmlFor='email'
                         type='email'
                         size='lg'
                         placeholder='Email address'
                         value={email}
-                        className='position-relative'
+                        className={`mb-3`}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </Form.Group>
@@ -72,7 +72,6 @@ export default function SignInComponent() {
                         size='lg'
                         placeholder='Password'
                         value={password}
-                        className='position-relative'
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </Form.Group>
@@ -87,13 +86,22 @@ export default function SignInComponent() {
                 </Form.Group>
 
                 {error && <div className='error text-danger'>{error}</div>}
-                <div className='d-grid'>
-                    <Button type='submit' variant='primary' size='lg'>
+                <div className='d-grid mb-2'>
+                    <button
+                        type='submit'
+                        className={`buttons-${theme} sign-in-register-btn`}
+                        size='lg'
+                    >
                         Sign in
-                    </Button>
+                    </button>
                 </div>
 
-                <Link to='/register'>Need an Account?</Link>
+                <Link
+                    to='/register'
+                    className={`go-to-register link-${theme} `}
+                >
+                    Need an Account?
+                </Link>
             </Form>
         </div>
     );

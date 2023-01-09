@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { ThemeContext } from '../../context/ThemeContext';
 
 export default function UpdateUser() {
     const [show, setShow] = useState(false);
-
+    const { theme } = useContext(ThemeContext);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     return (
         <>
-            <button onClick={handleShow}>
+            <button
+                className={`buttons-${theme} button-control-small`}
+                onClick={handleShow}
+            >
                 <FontAwesomeIcon icon={faPenToSquare}></FontAwesomeIcon>
             </button>
 

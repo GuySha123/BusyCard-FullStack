@@ -6,7 +6,6 @@ export default function LoginProvider({ children }) {
     const [loggedIn, setLoggedIn] = useState(
         localStorage.access ? true : false
     );
-    console.log(loggedIn);
 
     function changeLoggedIn(value) {
         setLoggedIn(value);

@@ -20,7 +20,6 @@ export default function UserInfoContextProvider({ children }) {
             setUser(null);
         }
     }, [token]);
-    console.log(user);
 
     return (
         <UserInfoContext.Provider value={{ user }}>

@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import '../../assets/styles/RegisterUser.css';
 import { registerUser } from '../../data/userStorage';
 //Bootstrap
-import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -175,11 +174,8 @@ export default function RegisterUser() {
                         name='email'
                         size='lg'
                         placeholder='Email address'
-                        className='position-relative'
-                        /*  */
                         value={formData.email}
                         onChange={handleChange}
-                        /*  */
                     />
 
                     {errors.email &&
@@ -197,11 +193,8 @@ export default function RegisterUser() {
                         size='lg'
                         placeholder='Password'
                         autoComplete='new-password'
-                        className='position-relative'
-                        /*  */
                         value={formData.password}
                         onChange={handleChange}
-                        /*  */
                     />
 
                     {errors.password &&
@@ -219,11 +212,8 @@ export default function RegisterUser() {
                         size='lg'
                         placeholder='Confirm Password'
                         autoComplete='new-password'
-                        className='position-relative'
-                        /*  */
                         value={matchPassword}
                         onChange={(e) => setMatchPassword(e.target.value)}
-                        /*  */
                     />
 
                     {errors.matchPassword &&
@@ -241,11 +231,8 @@ export default function RegisterUser() {
                             name='firstName'
                             size='lg'
                             placeholder='First name'
-                            autoComplete='given-name'
-                            /*  */
                             value={formData.firstName}
                             onChange={handleChange}
-                            /*  */
                         />
 
                         {errors.firstName &&
@@ -262,11 +249,8 @@ export default function RegisterUser() {
                             name='lastName'
                             size='lg'
                             placeholder='Last name'
-                            autoComplete='family-name'
-                            /*  */
                             value={formData.lastName}
                             onChange={handleChange}
-                            /*  */
                         />
                         {errors.lastName &&
                             errors.lastName.map((error, index) => (
@@ -288,9 +272,13 @@ export default function RegisterUser() {
                 </Form.Group>
 
                 <div className='d-grid'>
-                    <Button type='submit' size='lg'>
+                    <button
+                        type='submit'
+                        className={`buttons-${theme} sign-in-register-btn`}
+                        size='lg'
+                    >
                         Sign-Up
-                    </Button>
+                    </button>
                 </div>
             </Form>
         </div>

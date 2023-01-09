@@ -6,7 +6,6 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react';
 import businessDefaultCardImage from '../../assets/images/cards/businesscard1015419960720.jpg';
-
 import { ThemeContext } from '../../context/ThemeContext';
 import { UserInfoContext } from '../../context/UserInfoContext';
 import CardDetails from './CardDetails';
@@ -19,8 +18,10 @@ export default function CardsTemplate({ cards, onDelete }) {
     const [openId, setOpenId] = useState(null);
 
     const parseDateString = (dateString) => {
-        const [day, month, year] = dateString.split('/');
-        return new Date(year, month - 1, day);
+        const [date, time] = dateString.split(', ');
+        const [day, month, year] = date.split('/');
+        const [hour, minute, second] = time.split(':');
+        return new Date(year, month - 1, day, hour, minute, second);
     };
     const sortedCards = cards.sort((a, b) => {
         const dateA = parseDateString(a.businessCreateDate);
@@ -53,7 +54,9 @@ export default function CardsTemplate({ cards, onDelete }) {
                             }}
                         ></div>
                         {/* Title */}
-                        <div className={`card-title-container`}>
+                        <div
+                            className={`card-title-container card-title-container-${theme}`}
+                        >
                             <div className={`card-title ps-3 pe-1 pt-2`}>
                                 <div
                                     className={`business-title col-10 text-truncate`}
@@ -87,7 +90,9 @@ export default function CardsTemplate({ cards, onDelete }) {
                                             <ul>
                                                 <CardSettingsDropdown
                                                     card={c}
+                                                    id={i}
                                                     onDelete={onDelete}
+                                                    setOpen={setOpen}
                                                 />
                                             </ul>
                                         </div>

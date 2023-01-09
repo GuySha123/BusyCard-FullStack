@@ -1,0 +1,12 @@
+.laoding-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.loading-spinner {
+    width: 3.125rem !important;
+    height: 3.125rem !important;
+    font-size: 2em;
+}

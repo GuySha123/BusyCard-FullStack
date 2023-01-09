@@ -40,7 +40,6 @@
 
 .title-grid-holder {
     display: grid;
-
     grid-auto-flow: column;
     grid-auto-columns: minmax(10.875rem, 100vw) 1fr;
 }

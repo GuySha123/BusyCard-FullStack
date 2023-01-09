@@ -1,23 +1,46 @@
-body {
-    display: grid;
-    min-height: 100vh;
+* {
     font-family: 'Inter', sans-serif;
 }
 
+body {
+    display: grid;
+    min-height: 100vh;
+    font-weight: 500 !important;
+}
+
 h1 {
-    font-size: 1.5em;
-    font-weight: 700;
+
+    font-weight: 700 !important;
 }
 
 h2 {
     font-size: 1.25em;
-    font-weight: 600;
+    font-weight: 600 !important;
 }
 
 .button-control {
-    padding: 0 !important;
+    padding: 0 ;
     width: 8rem;
     height: 2.5rem;
-    border: none !important;
-    border-radius: 10px !important;
+    border: none ;
+    border-radius: 10px ;
+}
+
+.button-control-close {
+    padding: 0 ;
+    width: 8rem;
+    height: 2.5rem;
+    border: none ;
+    border-radius: 10px ;
+}
+
+.sign-in-register-btn {
+    height: 3rem;
+    font-size: 1.25em;
+    border-radius: 10px;
+}
+
+.button-control-small {
+    border-radius: 10px ;
+    width: 3rem;
 }

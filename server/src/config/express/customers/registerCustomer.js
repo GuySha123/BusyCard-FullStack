@@ -19,6 +19,4 @@ async function registerCustomer(req, res) {
     });
 }
 
-console.log(registerCustomer);
-
 module.exports = registerCustomer;

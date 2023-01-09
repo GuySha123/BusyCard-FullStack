@@ -1,13 +1,21 @@
-import React from 'react';
+import { faUser, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faUser, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
+import { useContext } from 'react';
 import { Table } from 'react-bootstrap';
 import UpdateUser from '../../components/users/UpdateUser';
+import { ThemeContext } from '../../context/ThemeContext';
+import DeleteMsgClient from '../messages/DeleteMsgClient';
+import '../../assets/styles/user/UserList.css';
 
 export default function UsersList({ users, onDelete }) {
+    const { theme } = useContext(ThemeContext);
     if (!users) return <div>No users</div>;
 
     let usersRows = users.map((u, i) => {
+        if (u.isAdminAccount) {
+            users.splice(i, 1);
+        }
         return (
             <tr key={i}>
                 <td>{i + 1}</td>
@@ -31,11 +39,8 @@ export default function UsersList({ users, onDelete }) {
                         ></FontAwesomeIcon>
                     </td>
                 )}
-                {/* <td>{u.isBusinessAccount}</td> */}
                 <td>
-                    <button onClick={() => onDelete(u._id)}>
-                        <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
-                    </button>
+                    <DeleteMsgClient user={u} id={i} onDelete={onDelete} />
                 </td>
                 <td>
                     <UpdateUser />
@@ -48,13 +53,13 @@ export default function UsersList({ users, onDelete }) {
         <>
             <p>Users: {`(${users.length})`}</p>
             <Table
-                className='text-center'
+                className={`text-center`}
                 striped
                 bordered
                 hover
-                variant='dark'
+                variant={theme === 'light' ? '' : 'dark'}
             >
-                <thead>
+                <thead className={`list-title`}>
                     <tr>
                         <td>ID</td>
                         <td>First Name</td>
