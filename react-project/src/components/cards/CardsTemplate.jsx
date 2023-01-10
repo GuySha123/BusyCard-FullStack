@@ -21,6 +21,7 @@ export default function CardsTemplate({ cards, onDelete }) {
     useEffect(() => {
         let handler = (e) => {
             if (
+                menuRef.current &&
                 !menuRef.current.contains(e.target) &&
                 document.getElementById('card-num: ' + openId) &&
                 !document

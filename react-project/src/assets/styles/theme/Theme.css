@@ -33,20 +33,6 @@
     background-color: #212529;
 }
 
-.logo-color-dark {
-    color: #F8F4EA;
-    font-weight: 700;
-}
-
-.logo-color-dark:active {
-    color: #F8F4EA;
-}
-
-.logo-color-dark:hover {
-    color: #F8F4EA;
-    font-weight: 700;
-}
-
 .link-dark {
     color: #F8F4EA !important;
     opacity: 0.9;
@@ -167,6 +153,7 @@
 }
 
 .link-light {
+    
     color: #212529 !important;
     opacity: 0.6;
     font-weight: 700;
@@ -181,20 +168,6 @@
 .link-light:hover {
     color: #212529 !important;
     opacity: 0.9;
-    font-weight: 700;
-}
-
-.logo-color-light {
-    color: #212529;
-    font-weight: 700;
-}
-
-.logo-color-light:active {
-    color: #212529;
-}
-
-.logo-color-light:hover {
-    color: #212529;
     font-weight: 700;
 }
 

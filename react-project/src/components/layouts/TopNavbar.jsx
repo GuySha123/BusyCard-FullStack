@@ -15,6 +15,7 @@ import { LoginContext } from '../../context/LoginContext';
 import { ThemeContext } from '../../context/ThemeContext';
 import { UserInfoContext } from '../../context/UserInfoContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
+import BusyCardSmallLogo from '../../assets/images/logo/BusyCardSmallLogo.png';
 
 export default function TopNavbar() {
     const [loggedIn, setLoggedIn] = useContext(LoginContext);
@@ -29,12 +30,12 @@ export default function TopNavbar() {
             className={`top-navbar navbar-footer-${theme} p-2 sticky-top`}
         >
             <Navbar.Brand
-                className={`logo-color-${theme}`}
+                className={`logo m-0`}
                 as={Link}
                 to='/'
                 eventkey='home'
             >
-                Busycard
+                <img src={BusyCardSmallLogo} alt='BusyCardSmallLogo' />
             </Navbar.Brand>
 
             <Nav className='d-block d-lg-none mt-1'>
