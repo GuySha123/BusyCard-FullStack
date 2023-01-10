@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import '../../assets/styles/RegisterUser.css';
 import { registerUser } from '../../data/userStorage';
 //Bootstrap
-import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -10,6 +9,8 @@ import Row from 'react-bootstrap/Row';
 import { faUser, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ThemeContext } from '../../context/ThemeContext';
+import RegisteredMsg from '../messages/RegisteredMsg';
+import { useNavigate } from 'react-router';
 /*  */
 
 export default function RegisterUser() {
@@ -24,6 +25,17 @@ export default function RegisterUser() {
         isBusinessAccount: false,
         isAdminAccount: false,
     });
+    const navigate = useNavigate();
+    const [showConfirm, setShowConfirm] = useState(false);
+
+    const handleCloseConfirm = () => {
+        setShowConfirm(false);
+        navigate('/signin');
+    };
+    const handleShowConfirm = () => {
+        setShowConfirm(true);
+        setTimeout(handleCloseConfirm, 3000);
+    };
 
     function handleChange(event) {
         const { name, value, type, checked } = event.target;
@@ -34,7 +46,11 @@ export default function RegisterUser() {
     }
 
     function checkEmail() {
-        if (formData.email.length < 6 || !formData.email.includes('@')) {
+        if (
+            formData.email.length < 6 ||
+            !formData.email.includes('@') ||
+            !formData.email.includes('.')
+        ) {
             return false;
         }
         return true;
@@ -93,8 +109,6 @@ export default function RegisterUser() {
                 isAdminAccount,
             });
 
-            console.log(formData);
-
             const emailError = [];
             if (!checkEmail()) {
                 emailError.push('Email is invalid');
@@ -142,145 +156,162 @@ export default function RegisterUser() {
                 throw new Error();
             }
 
-            return console.log('works!');
+            handleShowConfirm();
         } catch (error) {
             return console.log(error);
         }
     }
 
     return (
-        <div className={`register-user-container body-${theme} d-grid h-100`}>
-            <Form
-                className='register-user-form text-center w-100'
-                onSubmit={handleSubmit}
+        <>
+            <div
+                className={`register-user-container body-${theme} d-grid h-100`}
             >
-                {!formData.isBusinessAccount ? (
-                    <FontAwesomeIcon
-                        icon={faUser}
-                        className='fa-5x'
-                    ></FontAwesomeIcon>
-                ) : (
-                    <FontAwesomeIcon
-                        icon={faUserTie}
-                        className='fa-5x'
-                    ></FontAwesomeIcon>
-                )}
+                <Form
+                    className='register-user-form text-center w-100'
+                    onSubmit={handleSubmit}
+                >
+                    {!formData.isBusinessAccount ? (
+                        <FontAwesomeIcon
+                            icon={faUser}
+                            className='fa-5x'
+                        ></FontAwesomeIcon>
+                    ) : (
+                        <FontAwesomeIcon
+                            icon={faUserTie}
+                            className='fa-5x'
+                        ></FontAwesomeIcon>
+                    )}
 
-                <h1 className='fs-3 fw-normal mb-3'>Create a user</h1>
+                    <h1 className='fs-3 fw-normal mb-3'>Create a user</h1>
 
-                <Form.Group className='mb-3'>
-                    <Form.Control
-                        type='email'
-                        name='email'
-                        size='lg'
-                        placeholder='Email address'
-                        value={formData.email}
-                        onChange={handleChange}
-                    />
-
-                    {errors.email &&
-                        errors.email.map((error, index) => (
-                            <div className='error text-danger' key={index}>
-                                {error}
-                            </div>
-                        ))}
-                </Form.Group>
-
-                <Form.Group className='mb-3'>
-                    <Form.Control
-                        type='password'
-                        name='password'
-                        size='lg'
-                        placeholder='Password'
-                        autoComplete='new-password'
-                        value={formData.password}
-                        onChange={handleChange}
-                    />
-
-                    {errors.password &&
-                        errors.password.map((error, index) => (
-                            <div className='error text-danger' key={index}>
-                                {error}
-                            </div>
-                        ))}
-                </Form.Group>
-
-                <Form.Group className='mb-3'>
-                    <Form.Control
-                        type='password'
-                        name='matchPassword'
-                        size='lg'
-                        placeholder='Confirm Password'
-                        autoComplete='new-password'
-                        value={matchPassword}
-                        onChange={(e) => setMatchPassword(e.target.value)}
-                    />
-
-                    {errors.matchPassword &&
-                        errors.matchPassword.map((error, index) => (
-                            <div className='error text-danger' key={index}>
-                                {error}
-                            </div>
-                        ))}
-                </Form.Group>
-
-                <Row className='mb-3'>
-                    <Form.Group className='mb-3' as={Col} md='6'>
+                    <Form.Group className='mb-3'>
                         <Form.Control
-                            type='text'
-                            name='firstName'
+                            type='email'
+                            name='email'
                             size='lg'
-                            placeholder='First name'
-                            value={formData.firstName}
+                            placeholder='Email address'
+                            value={formData.email}
                             onChange={handleChange}
                         />
 
-                        {errors.firstName &&
-                            errors.firstName.map((error, index) => (
+                        {errors.email &&
+                            errors.email.map((error, index) => (
                                 <div className='error text-danger' key={index}>
                                     {error}
                                 </div>
                             ))}
                     </Form.Group>
 
-                    <Form.Group as={Col} md='6'>
+                    <Form.Group className='mb-3'>
                         <Form.Control
-                            type='text'
-                            name='lastName'
+                            type='password'
+                            name='password'
                             size='lg'
-                            placeholder='Last name'
-                            value={formData.lastName}
+                            placeholder='Password'
+                            autoComplete='new-password'
+                            value={formData.password}
                             onChange={handleChange}
                         />
-                        {errors.lastName &&
-                            errors.lastName.map((error, index) => (
+
+                        {errors.password &&
+                            errors.password.map((error, index) => (
                                 <div className='error text-danger' key={index}>
                                     {error}
                                 </div>
                             ))}
                     </Form.Group>
-                </Row>
 
-                <Form.Group className='d-flex justify-content-center mb-4'>
-                    <Form.Check
-                        label='Business Account'
-                        type='checkbox'
-                        name='isBusinessAccount'
-                        value={formData.isBusinessAccount}
-                        onChange={handleChange}
-                    />
-                </Form.Group>
+                    <Form.Group className='mb-3'>
+                        <Form.Control
+                            type='password'
+                            name='matchPassword'
+                            size='lg'
+                            placeholder='Confirm Password'
+                            autoComplete='new-password'
+                            value={matchPassword}
+                            onChange={(e) => setMatchPassword(e.target.value)}
+                        />
 
-                <div className='d-grid'>
-                    <button
-                        type='submit'
-                        className={`buttons-${theme} sign-in-register-btn`}
-                        size='lg'
-                    >
-                        Sign-Up
-                    </button>
-                </div>
-            </Form>
-        </div>
+                        {errors.matchPassword &&
+                            errors.matchPassword.map((error, index) => (
+                                <div className='error text-danger' key={index}>
+                                    {error}
+                                </div>
+                            ))}
+                    </Form.Group>
+
+                    <Row className='mb-3'>
+                        <Form.Group className='mb-3' as={Col} md='6'>
+                            <Form.Control
+                                type='text'
+                                name='firstName'
+                                size='lg'
+                                placeholder='First name'
+                                value={formData.firstName}
+                                onChange={handleChange}
+                            />
+
+                            {errors.firstName &&
+                                errors.firstName.map((error, index) => (
+                                    <div
+                                        className='error text-danger'
+                                        key={index}
+                                    >
+                                        {error}
+                                    </div>
+                                ))}
+                        </Form.Group>
+
+                        <Form.Group as={Col} md='6'>
+                            <Form.Control
+                                type='text'
+                                name='lastName'
+                                size='lg'
+                                placeholder='Last name'
+                                value={formData.lastName}
+                                onChange={handleChange}
+                            />
+                            {errors.lastName &&
+                                errors.lastName.map((error, index) => (
+                                    <div
+                                        className='error text-danger'
+                                        key={index}
+                                    >
+                                        {error}
+                                    </div>
+                                ))}
+                        </Form.Group>
+                    </Row>
+
+                    <Form.Group className='d-flex justify-content-center mb-4'>
+                        <Form.Check
+                            label='Business Account'
+                            type='checkbox'
+                            name='isBusinessAccount'
+                            value={formData.isBusinessAccount}
+                            onChange={handleChange}
+                        />
+                    </Form.Group>
+
+                    <div className='d-grid'>
+                        <button
+                            type='submit'
+                            className={`buttons-${theme} sign-in-register-btn`}
+                            size='lg'
+                        >
+                            Sign-Up
+                        </button>
+                    </div>
+                </Form>
+            </div>
+
+            <RegisteredMsg
+                showConfirm={showConfirm}
+                handleCloseConfirm={handleCloseConfirm}
+                fistName={formData.firstName}
+                lastName={formData.lastName}
+            />
+        </>
     );
 }

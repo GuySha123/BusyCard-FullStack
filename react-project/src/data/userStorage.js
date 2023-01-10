@@ -45,8 +45,7 @@ export async function registerUser(formData) {
     if (!response.ok) {
         throw new Error('An error occurred while fetching the user');
     }
-    const user = await response.json();
-    console.log(user);
+    console.log('Registered');
 }
 
 export async function getUsers() {

@@ -4,7 +4,7 @@ import {
     faPhone,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import businessDefaultCardImage from '../../assets/images/cards/businesscard1015419960720.jpg';
 import { ThemeContext } from '../../context/ThemeContext';
 import { UserInfoContext } from '../../context/UserInfoContext';
@@ -16,6 +16,27 @@ export default function CardsTemplate({ cards, onDelete }) {
     const { user } = useContext(UserInfoContext);
     const [open, setOpen] = useState(false);
     const [openId, setOpenId] = useState(null);
+    let menuRef = useRef();
+
+    useEffect(() => {
+        let handler = (e) => {
+            if (
+                !menuRef.current.contains(e.target) &&
+                document.getElementById('card-num: ' + openId) &&
+                !document
+                    .getElementById('card-num: ' + openId)
+                    .contains(e.target)
+            ) {
+                setOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handler);
+
+        return () => {
+            document.removeEventListener('mousedown', handler);
+        };
+    });
 
     const parseDateString = (dateString) => {
         const [date, time] = dateString.split(', ');
@@ -36,7 +57,6 @@ export default function CardsTemplate({ cards, onDelete }) {
             return (
                 <div key={i} className={`cards-col`}>
                     {/* Container */}
-
                     <div
                         className={`card-container  business-cards-${theme}`}
                         key={c._id}
@@ -67,7 +87,11 @@ export default function CardsTemplate({ cards, onDelete }) {
                                 {/*  */}
                                 {(user && user.isAdminAccount) ||
                                 user?._id === c.userId ? (
-                                    <div className={`card-settings`}>
+                                    <div
+                                        ref={menuRef}
+                                        id={'card-num: ' + i}
+                                        className={`card-settings`}
+                                    >
                                         <div
                                             className={`menu-trigger`}
                                             onClick={() => {
@@ -80,6 +104,7 @@ export default function CardsTemplate({ cards, onDelete }) {
                                                 className={`card-settings-dot`}
                                             ></FontAwesomeIcon>
                                         </div>
+
                                         <div
                                             className={`dropdown-menu-custom  dropdown-menu-box-${theme}  ${
                                                 open && openId === i

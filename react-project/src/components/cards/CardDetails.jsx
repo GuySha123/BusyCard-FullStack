@@ -1,7 +1,11 @@
+import { faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react';
+import { CloseButton } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import businessDefaultCardImage from '../../assets/images/cards/businesscard1015419960720.jpg';
+import '../../assets/styles/cards/CardDetails.css';
 
 import { ThemeContext } from '../../context/ThemeContext';
 
@@ -33,39 +37,72 @@ export default function CardDetails({ card }) {
             <Modal
                 show={show}
                 onHide={handleClose}
-                aria-labelledby='contained-modal-title-vcenter'
+                size='lg'
+                className={`modal-content-details`}
                 centered
             >
-                <Modal.Header closeButton>
-                    <Modal.Title>{businessName}</Modal.Title>
-                </Modal.Header>
+                <Modal.Body className={`components-${theme} details-container`}>
+                    <Modal.Title className={`card-details-title`}>
+                        {businessName}
+                    </Modal.Title>
+                    <CloseButton
+                        className={`form-close-x`}
+                        aria-label='Hide'
+                        onClick={handleClose}
+                    />
 
-                <Modal.Body>
-                    {businessImage === 'businessDefaultCardImage' ? (
-                        <img
-                            className='business-image-watched-card'
-                            src={businessDefaultCardImage}
-                        ></img>
-                    ) : (
-                        <img
-                            className='business-image-watched-card'
-                            src={businessImage}
-                            alt='Image not found'
-                        />
-                    )}
-                    <div className='business-content'>
-                        <p>Last updated: {businessCreateDate}</p>
-                        <p>Card editor: {cardEditor}</p>
-                        <hr></hr>
-                        <p className=''>Description: {businessDescription}</p>
-                        <p>Phone: {businessPhone}</p>
-                        <p>Address: {businessAddress}</p>
+                    <div
+                        className={`card-image image-details-container business-cards-image-${theme}`}
+                        style={{
+                            backgroundImage: `url(${
+                                businessImage === 'businessDefaultCardImage'
+                                    ? businessDefaultCardImage
+                                    : businessImage
+                            })`,
+                        }}
+                    ></div>
+
+                    <div className='card-editor'>
+                        <small>Card editor: {cardEditor}</small>
                     </div>
-                    <Modal.Footer>
-                        <Button variant='secondary' onClick={handleClose}>
+                    <div className={`last-update`}>
+                        <small>Last updated: {businessCreateDate}</small>
+                    </div>
+                    <div className={`description-details`}>
+                        Description: {businessDescription}
+                    </div>
+
+                    <div className={`phone-details my-2`}>
+                        <div className={`phone-adress-icon`}>
+                            <FontAwesomeIcon
+                                icon={faPhone}
+                                className={``}
+                            ></FontAwesomeIcon>
+                        </div>
+                        <div className={`phone-number ms-1`}>
+                            {businessPhone}
+                        </div>
+                    </div>
+                    <div className={`adress-details mb-2`}>
+                        <div className={`phone-adress-icon`}>
+                            <FontAwesomeIcon
+                                icon={faLocationDot}
+                                className={``}
+                            ></FontAwesomeIcon>
+                        </div>
+                        <div className={`adress-info ms-1`}>
+                            {businessAddress}
+                        </div>
+                    </div>
+                    <div className={`close-details`}>
+                        <button
+                            type='reset'
+                            onClick={handleClose}
+                            className={`buttons-${theme} button-control `}
+                        >
                             Close
-                        </Button>
-                    </Modal.Footer>
+                        </button>
+                    </div>
                 </Modal.Body>
             </Modal>
         </>

@@ -4,7 +4,7 @@ import {
     faPhone,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import businessDefaultCardImage from '../../assets/images/cards/businesscard1015419960720.jpg';
 import { ThemeContext } from '../../context/ThemeContext';
 import { UserInfoContext } from '../../context/UserInfoContext';
@@ -20,6 +20,7 @@ export default function ShowMyCards() {
     const { user } = useContext(UserInfoContext);
     const [open, setOpen] = useState(false);
     const [openId, setOpenId] = useState(null);
+    let menuRef = useRef();
     const userId = user?._id;
 
     const parseDateString = (dateString) => {
@@ -37,6 +38,26 @@ export default function ShowMyCards() {
     useEffect(() => {
         reRender();
     }, []);
+
+    useEffect(() => {
+        let handler = (e) => {
+            if (
+                !menuRef.current.contains(e.target) &&
+                document.getElementById('card-num: ' + openId) &&
+                !document
+                    .getElementById('card-num: ' + openId)
+                    .contains(e.target)
+            ) {
+                setOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handler);
+
+        return () => {
+            document.removeEventListener('mousedown', handler);
+        };
+    });
 
     function onDeleteClick(id) {
         deleteCard(id, token)
@@ -100,7 +121,11 @@ export default function ShowMyCards() {
                                     <h2>{c.businessName}</h2>
                                     <h3>{c.cardEditor}</h3>
                                 </div>
-                                <div className={`card-settings`}>
+                                <div
+                                    ref={menuRef}
+                                    id={'card-num: ' + i}
+                                    className={`card-settings`}
+                                >
                                     <div
                                         className={`menu-trigger`}
                                         onClick={() => {
@@ -110,9 +135,10 @@ export default function ShowMyCards() {
                                     >
                                         <FontAwesomeIcon
                                             icon={faEllipsisVertical}
-                                            className={`card-settings-dot`}
+                                            className={`card-settings-dot ellipsis-${theme}`}
                                         ></FontAwesomeIcon>
                                     </div>
+
                                     <div
                                         className={`dropdown-menu-custom  dropdown-menu-box-${theme}  ${
                                             open && openId === i

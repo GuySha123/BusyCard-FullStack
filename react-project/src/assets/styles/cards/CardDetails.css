@@ -1,0 +1,57 @@
+.details-container {
+    display: grid;
+    grid-template-columns: 1fr 5rem 8rem  25px;
+    grid-template-rows: repeat(auto-fill, minmax(1rem, 1fr));
+    gap: 10px;
+    border-radius: 25px;
+}
+
+.card-details-title {
+    font-weight: 700;
+    font-size: 2em;
+}
+
+.image-details-container {
+    display: grid;
+    grid-column: 1/5;
+    grid-row: 2;
+}
+
+.last-update {
+    grid-column: 2/5;
+    opacity: 0.7;
+}
+.card-editor {
+    opacity: 0.7;
+}
+
+.description-details {
+    display: grid;
+    grid-column: 1/5;
+    grid-row: 4;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.phone-details {
+    display: grid;
+    grid-auto-columns: 0.1fr 1fr;
+    grid-auto-flow: column;
+    grid-row: 5;
+}
+
+.adress-details{
+    display: grid;
+    grid-auto-columns: 0.1fr 1fr;
+    grid-auto-flow: column;
+    
+    grid-row: 6;
+}
+
+.close-details {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    grid-column: 3/5;
+    grid-row: 5/7;
+}

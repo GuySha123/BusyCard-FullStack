@@ -132,6 +132,11 @@
     opacity: 0.7;
 }
 
+.ellipsis-dark {
+    color: #F8F4EA ;
+    font-weight: 700;
+}
+
 /* Light mode */
 
 /* Page base */
@@ -169,7 +174,7 @@
 
 .link-light:focus {
     color: #212529 !important;
-    opacity: 0.6;
+    opacity: 0.9;
     font-weight: 700;
 }
 
