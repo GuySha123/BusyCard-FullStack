@@ -42,6 +42,7 @@ export default function ShowMyCards() {
     useEffect(() => {
         let handler = (e) => {
             if (
+                menuRef.current &&
                 !menuRef.current.contains(e.target) &&
                 document.getElementById('card-num: ' + openId) &&
                 !document
@@ -53,9 +54,11 @@ export default function ShowMyCards() {
         };
 
         document.addEventListener('mousedown', handler);
+        document.addEventListener('touchstart', handler);
 
         return () => {
             document.removeEventListener('mousedown', handler);
+            document.removeEventListener('touchstart', handler);
         };
     });
 
@@ -150,6 +153,7 @@ export default function ShowMyCards() {
                                             <CardSettingsDropdown
                                                 card={c}
                                                 onDelete={onDeleteClick}
+                                                setOpen={setOpen}
                                             />
                                         </ul>
                                     </div>

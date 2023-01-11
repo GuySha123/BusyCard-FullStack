@@ -1,9 +1,14 @@
-import { faUser, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import {
+    faEllipsisVertical,
+    faUser,
+    faUserTie,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import '../../assets/styles/user/Profile.css';
 import CreateCard from '../../components/cards/CreateCard';
 import ShowMyCards from '../../components/cards/ShowMyCards';
+import UserProfileSettingsDropdown from '../../components/users/UserProfileSettingsDropdown';
 import { ThemeContext } from '../../context/ThemeContext';
 import { UserInfoContext } from '../../context/UserInfoContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
@@ -13,6 +18,24 @@ export default function Profile() {
     const { theme } = useContext(ThemeContext);
     const { token } = useContext(UserTokenContext);
     const { user } = useContext(UserInfoContext);
+    const [open, setOpen] = useState(false);
+    let menuRef = useRef();
+
+    useEffect(() => {
+        let handler = (e) => {
+            if (menuRef.current && !menuRef.current.contains(e.target)) {
+                setOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handler);
+        document.addEventListener('touchstart', handler);
+
+        return () => {
+            document.removeEventListener('mousedown', handler);
+            document.removeEventListener('touchstart', handler);
+        };
+    });
 
     return (
         <>
@@ -27,7 +50,7 @@ export default function Profile() {
                             >
                                 <div className={`profile-grid-holder`}>
                                     <div
-                                        className={`profile-picture-container mt-3 ms-3 profile-image-${theme}`}
+                                        className={`profile-picture-container  ms-3 profile-image-${theme}`}
                                     >
                                         <div className={`profile-picture `}>
                                             <FontAwesomeIcon
@@ -41,6 +64,39 @@ export default function Profile() {
                                         </div>
                                     </div>
 
+                                    {/* Dropdown menu */}
+                                    <div
+                                        ref={menuRef}
+                                        className={`profile-settings mt-3 `}
+                                    >
+                                        <div
+                                            className={`profile-menu-trigger`}
+                                            onClick={() => {
+                                                setOpen(!open);
+                                            }}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={faEllipsisVertical}
+                                                className={`profile-settings-dot text-${theme}`}
+                                            ></FontAwesomeIcon>
+                                        </div>
+
+                                        <div
+                                            className={`dropdown-profile-menu-custom  dropdown-menu-box-${theme}  ${
+                                                open ? 'active' : 'inactive'
+                                            } `}
+                                        >
+                                            <ul>
+                                                <UserProfileSettingsDropdown
+                                                    user={user}
+                                                    token={token}
+                                                    setOpen={setOpen}
+                                                />
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    {/*  */}
+
                                     <div className={`profile-user-info ms-3`}>
                                         <h1>
                                             {user?.firstName} {user?.lastName}
@@ -49,15 +105,15 @@ export default function Profile() {
                                     </div>
 
                                     <div className={`my-cards-title ms-3`}>
-                                        <h2>My Cards: </h2>
+                                        <h3>My Cards: </h3>
                                     </div>
 
-                                    <div className={`profile-btn-area me-3`}>
+                                    <div className={`profile-btn-area`}>
                                         <CreateCard />
                                     </div>
                                 </div>
                             </div>
-                            {user.isBusinessAccount ? (
+                            {user?.isBusinessAccount ? (
                                 <ShowMyCards user={user} />
                             ) : (
                                 <></>

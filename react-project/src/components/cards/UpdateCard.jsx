@@ -45,7 +45,10 @@ export default function UpdateCard({ card, setOpen }) {
     });
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        setShow(true);
+        setOpen(false);
+    };
     const handleCloseConfirm = () => {
         setShowConfirm(false);
         setOpen(false);

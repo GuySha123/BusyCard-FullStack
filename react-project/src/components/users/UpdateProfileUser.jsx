@@ -1,5 +1,6 @@
 import {
-    faPenToSquare,
+    faEnvelope,
+    faLock,
     faUser,
     faUserTie,
 } from '@fortawesome/free-solid-svg-icons';
@@ -9,29 +10,34 @@ import { CloseButton, Form, InputGroup, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import '../../assets/styles/user/UpdateAccount.css';
 import { ThemeContext } from '../../context/ThemeContext';
-import { UserTokenContext } from '../../context/UserTokenContext';
 import { updateUser } from '../../data/userStorage';
 
-export default function UpdateUser({ users }) {
-    const [show, setShow] = useState(false);
+export default function UpdateProfileUser({ user, token, setOpen }) {
     const { theme } = useContext(ThemeContext);
-    const { token } = useContext(UserTokenContext);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     const [errors, setErrors] = useState({});
-    const [id, setId] = useState(users?._id);
+    const [id, setId] = useState(user._id);
     const [formData, setFormData] = useState({
-        email: users?.email,
-        firstName: users?.firstName,
-        lastName: users?.lastName,
-        isBusinessAccount: users?.isBusinessAccount,
+        email: user?.email,
+        firstName: user?.firstName,
+        lastName: user?.lastName,
+        isBusinessAccount: user?.isBusinessAccount,
     });
+
+    const [password, setPassword] = useState('');
+    const [matchPassword, setMatchPassword] = useState('');
+
     const navigate = useNavigate();
+    const [show, setShow] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => {
+        setShow(true);
+        setOpen(false);
+    };
 
     const handleCloseConfirm = () => {
         setShowConfirm(false);
-        navigate('/users');
+        navigate('/profile');
     };
     const handleShowConfirm = () => {
         setShowConfirm(true);
@@ -56,7 +62,12 @@ export default function UpdateUser({ users }) {
         }
         return true;
     }
-
+    function checkPassword() {
+        if (password.length < 6) {
+            return false;
+        }
+        return true;
+    }
     function checkFirstName() {
         if (
             formData.firstName.length < 2 ||
@@ -74,6 +85,13 @@ export default function UpdateUser({ users }) {
             return false;
         }
         return true;
+    }
+
+    function checkPasswordMatch() {
+        if (password === matchPassword && matchPassword.length > 0) {
+            return true;
+        }
+        return false;
     }
 
     function handleSubmit(event) {
@@ -103,6 +121,16 @@ export default function UpdateUser({ users }) {
                 emailError.push('Email is invalid');
             }
 
+            /* const passwordError = [];
+            if (!checkPassword()) {
+                passwordError.push('Password must be at least 6 charecters');
+            }
+
+            const passwordMatchError = [];
+            if (!checkPasswordMatch()) {
+                passwordMatchError.push('Password does not match');
+            } */
+
             const firstNameError = [];
             if (!checkFirstName()) {
                 firstNameError.push('Please enter a valid name');
@@ -117,7 +145,12 @@ export default function UpdateUser({ users }) {
             if (emailError.length > 0) {
                 newErrors.email = emailError;
             }
-
+            /* if (passwordError.length > 0) {
+                newErrors.password = passwordError;
+            }
+            if (passwordMatchError.length > 0) {
+                newErrors.matchPassword = passwordMatchError;
+            } */
             if (firstNameError.length > 0) {
                 newErrors.firstName = firstNameError;
             }
@@ -138,12 +171,13 @@ export default function UpdateUser({ users }) {
 
     return (
         <>
-            <button
-                className={`buttons-${theme} button-control-small`}
+            <div
+                className={`dropdown-item-custom dropdown-item-custom-${theme}`}
                 onClick={handleShow}
+                style={{ cursor: 'pointer' }}
             >
-                <FontAwesomeIcon icon={faPenToSquare}></FontAwesomeIcon>
-            </button>
+                Update account
+            </div>
 
             <Modal
                 show={show}
@@ -203,6 +237,58 @@ export default function UpdateUser({ users }) {
                                         {error}
                                     </div>
                                 ))}
+                        </Form.Group>
+
+                        <Form.Group className={`update-acc-inputs mb-3`}>
+                            <InputGroup hasValidation>
+                                <Form.Control
+                                    type='password'
+                                    name='password'
+                                    size='lg'
+                                    placeholder='Password'
+                                    autoComplete='new-password'
+                                    value={password}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
+                                />
+                            </InputGroup>
+
+                            {/* {errors.password &&
+                                errors.password.map((error, index) => (
+                                    <div
+                                        className='error text-danger'
+                                        key={index}
+                                    >
+                                        {error}
+                                    </div>
+                                ))} */}
+                        </Form.Group>
+
+                        <Form.Group className={`update-acc-inputs mb-3`}>
+                            <InputGroup hasValidation>
+                                <Form.Control
+                                    type='password'
+                                    name='matchPassword'
+                                    size='lg'
+                                    placeholder='Confirm Password'
+                                    autoComplete='new-password'
+                                    value={matchPassword}
+                                    onChange={(e) =>
+                                        setMatchPassword(e.target.value)
+                                    }
+                                />
+                            </InputGroup>
+
+                            {/* {errors.matchPassword &&
+                                errors.matchPassword.map((error, index) => (
+                                    <div
+                                        className='error text-danger'
+                                        key={index}
+                                    >
+                                        {error}
+                                    </div>
+                                ))} */}
                         </Form.Group>
 
                         <div

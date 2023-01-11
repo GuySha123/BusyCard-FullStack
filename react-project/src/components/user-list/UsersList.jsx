@@ -43,7 +43,7 @@ export default function UsersList({ users, onDelete }) {
                     <DeleteMsgClient user={u} id={i} onDelete={onDelete} />
                 </td>
                 <td>
-                    <UpdateUser />
+                    <UpdateUser users={u} />
                 </td>
             </tr>
         );

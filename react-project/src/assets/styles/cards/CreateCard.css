@@ -13,7 +13,7 @@
 .form-title {
     display: grid;
     align-content: center;
-    grid-column: 1/4;
+    grid-column: 1/3;
 }
 
 .form-close-x {
@@ -24,14 +24,13 @@
 .form-inputs-group {
     display: grid;
     grid-column: 1/5;
-    grid-template-columns: 1fr 1fr 1fr 25px;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-row: 2;
 }
 
 .form-inputs {
     display: grid;
     grid-column: 1/4;
-    
 }
 
 .business-description {
@@ -40,9 +39,15 @@
 
 .form-btn {
     display: grid;
-
     grid-auto-flow: column;
-    grid-column: 3/4;
+    grid-column: 3;
     grid-row: 6;
     
+}
+
+@media screen and (max-width: 576px) {
+    .form-btn {
+        grid-column: 2/3;
+        justify-content: center;
+    }
 }

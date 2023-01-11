@@ -9,11 +9,13 @@ export default function DeleteMsgCard({ id, card, setOpen, onDelete }) {
     const [showConfirm, setShowConfirm] = useState(false);
     const { theme } = useContext(ThemeContext);
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        setShow(true);
+        setOpen(false);
+    };
 
     const handleCloseConfirm = () => {
         onDelete(card?._id);
-        setOpen(false);
         setShowConfirm(false);
     };
     const handleShowConfirm = () => {

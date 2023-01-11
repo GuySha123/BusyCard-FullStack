@@ -33,9 +33,11 @@ export default function CardsTemplate({ cards, onDelete }) {
         };
 
         document.addEventListener('mousedown', handler);
+        document.addEventListener('touchstart', handler);
 
         return () => {
             document.removeEventListener('mousedown', handler);
+            document.removeEventListener('touchstart', handler);
         };
     });
 
@@ -85,7 +87,7 @@ export default function CardsTemplate({ cards, onDelete }) {
                                     <h2>{c.businessName}</h2>
                                     <h3>{c.cardEditor}</h3>
                                 </div>
-                                {/*  */}
+                                {/* Dropdown menu */}
                                 {(user && user.isAdminAccount) ||
                                 user?._id === c.userId ? (
                                     <div

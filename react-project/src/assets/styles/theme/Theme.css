@@ -3,7 +3,7 @@
 /* Page base */
 .body-dark {
     background-color: #18191a;
-    color: #F8F4EA;
+    color: #F8F4EA !important;
 }
 
 .components-dark {

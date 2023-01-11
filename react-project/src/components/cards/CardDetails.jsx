@@ -62,17 +62,20 @@ export default function CardDetails({ card }) {
                         }}
                     ></div>
 
-                    <div className='card-editor'>
-                        <small>Card editor: {cardEditor}</small>
+                    <div className='card-detail'>
+                        <div className='card-editor'>
+                            <small>Card editor: {cardEditor}</small>
+                        </div>
+                        <div className={`last-update`}>
+                            <small>Last updated: {businessCreateDate}</small>
+                        </div>
                     </div>
-                    <div className={`last-update`}>
-                        <small>Last updated: {businessCreateDate}</small>
-                    </div>
+
                     <div className={`description-details`}>
                         Description: {businessDescription}
                     </div>
 
-                    <div className={`phone-details my-2`}>
+                    <div className={`phone-details `}>
                         <div className={`phone-adress-icon`}>
                             <FontAwesomeIcon
                                 icon={faPhone}

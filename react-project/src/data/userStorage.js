@@ -53,20 +53,43 @@ export async function getUsers() {
 }
 
 export async function updateUser(formData, token, id) {
-    const response = await fetch(BASE_URL + '/updateuser?userid=' + id, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            token: token,
-        },
-        body: JSON.stringify(formData),
-    });
+    const response = await fetch(
+        BASE_URL + '/customers/updateuser?updateid=' + id,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                token: token,
+            },
+            body: JSON.stringify(formData),
+        }
+    );
     if (!response.ok) {
-        throw new Error('An error occurred while fetching the your card');
+        throw new Error('An error occurred while fetching the your user');
     }
-    const cards = await response.json();
+    const user = await response.json();
 
-    return cards;
+    return user;
+}
+
+export async function updateUserPassword(password, token, id) {
+    const response = await fetch(
+        BASE_URL + '/customers/updatepassword?userid=' + id,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                token: token,
+            },
+            body: JSON.stringify(password),
+        }
+    );
+    if (!response.ok) {
+        throw new Error('An error occurred while fetching the your user');
+    }
+    const user = await response.json();
+
+    return user;
 }
 
 export async function deleteUser(id) {

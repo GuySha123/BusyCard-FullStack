@@ -19,6 +19,7 @@ async function signInCustomer(email, password) {
         if (result) {
             return customerFromDB;
         }
+
         return null;
     } catch {
         return null;
@@ -42,18 +43,36 @@ async function getAllCustomers() {
     }
 }
 
-async function updateUserData(userid, userUpdatedData) {
+async function updateUserData(updateid, userUpdatedData) {
     try {
         const filter = {
-            _id: userid,
+            _id: updateid,
         };
         const userToUpdate = await customerModel.findOneAndUpdate(
             filter,
             userUpdatedData
         );
+
         return userToUpdate;
-    } catch {
-        return null;
+    } catch (e) {
+        return console.error(e, e.stack);
+    }
+}
+
+async function updateUserPassword(userid, password) {
+    try {
+        const filter = {
+            _id: userid,
+        };
+
+        const userPasswordToUpdate = await customerModel.findOneAndUpdate(
+            filter,
+            (password = bcryptjs.hashSync(password))
+        );
+
+        return userPasswordToUpdate;
+    } catch (e) {
+        return console.error(e, e.stack);
     }
 }
 
@@ -75,4 +94,5 @@ module.exports = {
     getAllCustomers,
     deleteOneUserById,
     updateUserData,
+    updateUserPassword,
 };

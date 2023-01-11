@@ -13,8 +13,6 @@ async function signinCustomer(req, res) {
     const token = jsonwebtoken.sign(
         {
             customerId: retVal._id,
-            isBusinessAccount: retVal.isBusinessAccount,
-            isAdminAccount: retVal.isAdminAccount,
             rememberMe: retVal.rememberMe,
         },
         'mykey'

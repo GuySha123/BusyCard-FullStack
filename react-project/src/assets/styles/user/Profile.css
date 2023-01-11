@@ -1,9 +1,10 @@
 .profile-info-area {
+    position: relative;
     display: flex;
     margin: auto;
     width: 70vw;
     border-radius: 15px;
-    height: 20rem;
+    height: 18rem;
 }
 
 @media screen and (max-width: 576px) {
@@ -14,9 +15,8 @@
 
 .profile-grid-holder {
     display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(9rem, 100vw) 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    width: 100%;
+    grid-template-columns: 2fr 8rem 40px
 }
 
 .profile-grid-holder {
@@ -25,6 +25,9 @@
 }
 
 .profile-picture-container {
+    display: grid;
+    grid-column: 1/4;
+    grid-row: 1;
     width: 7.5rem;
     height: 7.5rem;
     border-radius: 50%;
@@ -33,16 +36,52 @@
 .my-cards-title {
     display: grid;
     align-content: center;
+    grid-column: 1/4;
+    grid-row: 4;
 }
 
 .profile-user-info{
     display: grid;
     align-content: center;
+    grid-column: 1/4;
+    grid-row: 3;
 }
 
+/*  */
+
+.profile-settings {
+    display: grid;
+    cursor: pointer;
+    justify-content: center;
+    align-content: center;
+    grid-row: 1;
+    grid-column: 3;
+    height: 3rem;
+}
+
+.profile-settings-dot {
+    font-size: 2em;
+    color: black;
+}
+
+.profile-menu-trigger {
+    display: grid;
+    justify-content: center;
+    width: 1.25rem;
+    opacity: 0.5;
+    transition: 400ms ease-in-out;
+}
+
+.profile-menu-trigger:hover {
+    opacity: 1;
+}
+
+/*  */
 
 .profile-btn-area {
     display: grid;
+    justify-content: center;
     align-content: center;
-    grid-row: 3;
+    grid-column: 2/4;
+    grid-row: 4;
 }

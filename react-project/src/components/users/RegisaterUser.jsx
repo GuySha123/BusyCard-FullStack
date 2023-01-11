@@ -11,10 +11,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ThemeContext } from '../../context/ThemeContext';
 import RegisteredMsg from '../messages/RegisteredMsg';
 import { useNavigate } from 'react-router';
+import { UserInfoContext } from '../../context/UserInfoContext';
 /*  */
 
 export default function RegisterUser() {
     const { theme } = useContext(ThemeContext);
+    const { user } = useContext(UserInfoContext);
     const [errors, setErrors] = useState({});
     const [matchPassword, setMatchPassword] = useState('');
     const [formData, setFormData] = useState({
@@ -162,6 +164,9 @@ export default function RegisterUser() {
         }
     }
 
+    if (user) {
+        navigate('/404');
+    }
     return (
         <>
             <div
