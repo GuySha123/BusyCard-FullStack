@@ -8,7 +8,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import '../../assets/styles/user/Profile.css';
 import CreateCard from '../../components/cards/CreateCard';
 import ShowMyCards from '../../components/cards/ShowMyCards';
-import UserProfileSettingsDropdown from '../../components/users/UserProfileSettingsDropdown';
+import ProfileSettingsDropdown from '../../components/users/ProfileSettingsDropdown';
 import { ThemeContext } from '../../context/ThemeContext';
 import { UserInfoContext } from '../../context/UserInfoContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
@@ -87,7 +87,7 @@ export default function Profile() {
                                             } `}
                                         >
                                             <ul>
-                                                <UserProfileSettingsDropdown
+                                                <ProfileSettingsDropdown
                                                     user={user}
                                                     token={token}
                                                     setOpen={setOpen}
@@ -97,20 +97,28 @@ export default function Profile() {
                                     </div>
                                     {/*  */}
 
-                                    <div className={`profile-user-info ms-3`}>
+                                    <div
+                                        className={`profile-user-full-name px-3`}
+                                    >
                                         <h1>
                                             {user?.firstName} {user?.lastName}
                                         </h1>
-                                        <h2>{user?.email}</h2>
+                                    </div>
+                                    <div className='profile-user-email px-3'>
+                                        <h3 className='mb-4'>{user?.email}</h3>
                                     </div>
 
                                     <div className={`my-cards-title ms-3`}>
                                         <h3>My Cards: </h3>
                                     </div>
 
-                                    <div className={`profile-btn-area`}>
-                                        <CreateCard />
-                                    </div>
+                                    {user?.isBusinessAccount ? (
+                                        <div className={`profile-btn-area`}>
+                                            <CreateCard />
+                                        </div>
+                                    ) : (
+                                        <></>
+                                    )}
                                 </div>
                             </div>
                             {user?.isBusinessAccount ? (

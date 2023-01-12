@@ -6,11 +6,11 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react';
 import { CloseButton, Form, InputGroup, Modal } from 'react-bootstrap';
-import { useNavigate } from 'react-router';
 import '../../assets/styles/user/UpdateAccount.css';
 import { ThemeContext } from '../../context/ThemeContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
 import { updateUser } from '../../data/userStorage';
+import UpdatedUserMsg from '../messages/UpdatedUserMsg';
 
 export default function UpdateUser({ users }) {
     const [show, setShow] = useState(false);
@@ -26,12 +26,10 @@ export default function UpdateUser({ users }) {
         lastName: users?.lastName,
         isBusinessAccount: users?.isBusinessAccount,
     });
-    const navigate = useNavigate();
     const [showConfirm, setShowConfirm] = useState(false);
 
     const handleCloseConfirm = () => {
         setShowConfirm(false);
-        navigate('/users');
     };
     const handleShowConfirm = () => {
         setShowConfirm(true);
@@ -265,6 +263,7 @@ export default function UpdateUser({ users }) {
                                 type='checkbox'
                                 name='isBusinessAccount'
                                 value={formData.isBusinessAccount}
+                                defaultChecked={formData.isBusinessAccount}
                                 onChange={handleChange}
                             />
                         </Form.Group>
@@ -287,6 +286,11 @@ export default function UpdateUser({ users }) {
                     </Form>
                 </Modal.Body>
             </Modal>
+
+            <UpdatedUserMsg
+                showConfirm={showConfirm}
+                handleCloseConfirm={handleCloseConfirm}
+            />
         </>
     );
 }

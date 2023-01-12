@@ -20,7 +20,7 @@ const getMyCards = require('../config/express/cards/getMyCards');
 const getMyCardByUserAndCardId = require('../config/express/cards/getMyCardByUserAndCardId');
 const updateCard = require('../config/express/cards/updateCard');
 const updateUser = require('../config/express/customers/updateUserData');
-const updateUserPassword = require('../config/express/customers/updateUserPassword copy');
+const updateUserPasswordDb = require('../config/express/customers/updateUserPasswordDb');
 
 server
     .get('/user', authenticateCustomer, me)
@@ -37,6 +37,10 @@ server
     .get('/cards/getmycardbyid', authenticateCustomer, getMyCardByUserAndCardId)
     .put('/cards/updatecard', authenticateCustomer, updateCard)
 
-    .put('/customers/updatepassword', authenticateCustomer, updateUserPassword);
+    .put(
+        '/customers/updatepassword',
+        authenticateCustomer,
+        updateUserPasswordDb
+    );
 
 server.listen(5000, () => console.log('Express server listening'));

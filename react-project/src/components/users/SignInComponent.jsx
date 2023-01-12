@@ -3,17 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom';
-import { LoginContext } from '../../context/LoginContext';
 import { ThemeContext } from '../../context/ThemeContext';
-import { UserInfoContext } from '../../context/UserInfoContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
 import { signinUser } from '../../data/userStorage';
 import SignedInMsg from '../messages/SignedInMsg';
 
 export default function SignInComponent() {
     const { theme } = useContext(ThemeContext);
-    const { user } = useContext(UserInfoContext);
-    const [loggedIn, setLoggedIn] = useContext(LoginContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
@@ -45,7 +41,7 @@ export default function SignInComponent() {
                 } else {
                     setSessionStorageToken(token);
                 }
-
+                console.log('Logged In');
                 handleShowConfirm();
             }
         } catch (error) {
@@ -53,10 +49,6 @@ export default function SignInComponent() {
             setError('Email/Password incorrect');
             return;
         }
-    }
-
-    if (user) {
-        navigate('/404');
     }
 
     return (

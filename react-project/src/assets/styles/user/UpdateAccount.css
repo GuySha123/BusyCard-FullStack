@@ -34,10 +34,19 @@
     grid-auto-flow: column;
 }
 
+.update-psw-btn{
+    display: grid;
+}
+.change-password-btn{
+    width: 10rem;
+    height: 3rem;
+    align-content: center;
+}
+
 .update-checkbox {
     display: grid;
     grid-column: 1/4;
-    grid-row: 6;
+    grid-row: 4;
 }
 
 
@@ -52,5 +61,10 @@
     .update-acc-btn {
         grid-column: 2/3;
         justify-content: center;
+    }
+    .update-psw-btn {
+        grid-column: 2;
+        justify-content: center;
+        align-content: center;
     }
 }

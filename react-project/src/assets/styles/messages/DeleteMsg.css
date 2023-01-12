@@ -33,3 +33,9 @@
     grid-row: 3;
     
 }
+
+@media screen and (max-width: 576px) {
+    .msg-options {
+        grid-column: 2/3;
+    }
+}

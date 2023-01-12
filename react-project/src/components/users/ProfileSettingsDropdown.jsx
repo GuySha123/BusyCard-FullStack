@@ -1,22 +1,12 @@
 import React from 'react';
-import DeleteMsgCard from '../messages/DeleteMsgCard';
-import UpdateCard from './UpdateCard';
+import DeleteMsgUserAcc from '../messages/DeleteMsgUserAcc';
+import UpdateProfileUser from './UpdateProfileUser';
 
-export default function ProfileSettingsDropdown({
-    id,
-    card,
-    setOpen,
-    onDelete,
-}) {
+export default function ProfileSettingsDropdown({ user, token, setOpen }) {
     return (
         <>
-            <UpdateCard card={card} setOpen={setOpen} />
-            <DeleteMsgCard
-                card={card}
-                id={id}
-                onDelete={onDelete}
-                setOpen={setOpen}
-            />
+            <UpdateProfileUser user={user} token={token} setOpen={setOpen} />
+            <DeleteMsgUserAcc user={user} setOpen={setOpen} />
         </>
     );
 }

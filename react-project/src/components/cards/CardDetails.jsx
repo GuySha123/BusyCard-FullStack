@@ -2,7 +2,6 @@ import { faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react';
 import { CloseButton } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import businessDefaultCardImage from '../../assets/images/cards/businesscard1015419960720.jpg';
 import '../../assets/styles/cards/CardDetails.css';

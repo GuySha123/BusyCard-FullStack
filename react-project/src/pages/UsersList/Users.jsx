@@ -6,6 +6,7 @@ import { UserInfoContext } from '../../context/UserInfoContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
 import { deleteUser, getUsers } from '../../data/userStorage';
 import SignIn from '../Sginin/SignIn';
+/* Note: This page is for computer only */
 
 export default function Users() {
     const { theme } = useContext(ThemeContext);

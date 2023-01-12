@@ -1,9 +1,4 @@
-import {
-    faEnvelope,
-    faLock,
-    faUser,
-    faUserTie,
-} from '@fortawesome/free-solid-svg-icons';
+import { faUser, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react';
 import { CloseButton, Form, InputGroup, Modal } from 'react-bootstrap';
@@ -11,33 +6,58 @@ import { useNavigate } from 'react-router';
 import '../../assets/styles/user/UpdateAccount.css';
 import { ThemeContext } from '../../context/ThemeContext';
 import { updateUser } from '../../data/userStorage';
+import UpdatedUserMsg from '../messages/UpdatedUserMsg';
+import UpdateAccPsw from './UpdateAccPsw';
 
 export default function UpdateProfileUser({ user, token, setOpen }) {
     const { theme } = useContext(ThemeContext);
     const [errors, setErrors] = useState({});
-    const [id, setId] = useState(user._id);
+    const [id, setId] = useState(user?._id);
+    const [password, setPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [matchPassword, setMatchPassword] = useState('');
     const [formData, setFormData] = useState({
         email: user?.email,
         firstName: user?.firstName,
         lastName: user?.lastName,
         isBusinessAccount: user?.isBusinessAccount,
     });
-
-    const [password, setPassword] = useState('');
-    const [matchPassword, setMatchPassword] = useState('');
-
     const navigate = useNavigate();
+
     const [show, setShow] = useState(false);
-    const [showConfirm, setShowConfirm] = useState(false);
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+        setErrors({});
+    };
     const handleShow = () => {
         setShow(true);
         setOpen(false);
     };
 
+    const [showPws, setShowPws] = useState(false);
+    const handleClosePws = () => {
+        setShowPws(false);
+        setShow(true);
+        setPassword('');
+        setNewPassword('');
+        setMatchPassword('');
+        setErrors({});
+    };
+
+    const handleShowPws = () => {
+        setShowPws(true);
+        setShow(false);
+    };
+
+    const [showConfirm, setShowConfirm] = useState(false);
     const handleCloseConfirm = () => {
-        setShowConfirm(false);
-        navigate('/profile');
+        if (showPws) {
+            handleClosePws();
+            setShowConfirm(false);
+        } else {
+            setShowConfirm(false);
+            navigate('/profile');
+        }
     };
     const handleShowConfirm = () => {
         setShowConfirm(true);
@@ -62,12 +82,7 @@ export default function UpdateProfileUser({ user, token, setOpen }) {
         }
         return true;
     }
-    function checkPassword() {
-        if (password.length < 6) {
-            return false;
-        }
-        return true;
-    }
+
     function checkFirstName() {
         if (
             formData.firstName.length < 2 ||
@@ -85,13 +100,6 @@ export default function UpdateProfileUser({ user, token, setOpen }) {
             return false;
         }
         return true;
-    }
-
-    function checkPasswordMatch() {
-        if (password === matchPassword && matchPassword.length > 0) {
-            return true;
-        }
-        return false;
     }
 
     function handleSubmit(event) {
@@ -121,16 +129,6 @@ export default function UpdateProfileUser({ user, token, setOpen }) {
                 emailError.push('Email is invalid');
             }
 
-            /* const passwordError = [];
-            if (!checkPassword()) {
-                passwordError.push('Password must be at least 6 charecters');
-            }
-
-            const passwordMatchError = [];
-            if (!checkPasswordMatch()) {
-                passwordMatchError.push('Password does not match');
-            } */
-
             const firstNameError = [];
             if (!checkFirstName()) {
                 firstNameError.push('Please enter a valid name');
@@ -145,12 +143,7 @@ export default function UpdateProfileUser({ user, token, setOpen }) {
             if (emailError.length > 0) {
                 newErrors.email = emailError;
             }
-            /* if (passwordError.length > 0) {
-                newErrors.password = passwordError;
-            }
-            if (passwordMatchError.length > 0) {
-                newErrors.matchPassword = passwordMatchError;
-            } */
+
             if (firstNameError.length > 0) {
                 newErrors.firstName = firstNameError;
             }
@@ -239,58 +232,6 @@ export default function UpdateProfileUser({ user, token, setOpen }) {
                                 ))}
                         </Form.Group>
 
-                        <Form.Group className={`update-acc-inputs mb-3`}>
-                            <InputGroup hasValidation>
-                                <Form.Control
-                                    type='password'
-                                    name='password'
-                                    size='lg'
-                                    placeholder='Password'
-                                    autoComplete='new-password'
-                                    value={password}
-                                    onChange={(e) =>
-                                        setPassword(e.target.value)
-                                    }
-                                />
-                            </InputGroup>
-
-                            {/* {errors.password &&
-                                errors.password.map((error, index) => (
-                                    <div
-                                        className='error text-danger'
-                                        key={index}
-                                    >
-                                        {error}
-                                    </div>
-                                ))} */}
-                        </Form.Group>
-
-                        <Form.Group className={`update-acc-inputs mb-3`}>
-                            <InputGroup hasValidation>
-                                <Form.Control
-                                    type='password'
-                                    name='matchPassword'
-                                    size='lg'
-                                    placeholder='Confirm Password'
-                                    autoComplete='new-password'
-                                    value={matchPassword}
-                                    onChange={(e) =>
-                                        setMatchPassword(e.target.value)
-                                    }
-                                />
-                            </InputGroup>
-
-                            {/* {errors.matchPassword &&
-                                errors.matchPassword.map((error, index) => (
-                                    <div
-                                        className='error text-danger'
-                                        key={index}
-                                    >
-                                        {error}
-                                    </div>
-                                ))} */}
-                        </Form.Group>
-
                         <div
                             className={`update-acc-inputs update-user-name mb-3`}
                         >
@@ -343,6 +284,16 @@ export default function UpdateProfileUser({ user, token, setOpen }) {
                             </Form.Group>
                         </div>
 
+                        <div className={`update-psw-btn mb-3`}>
+                            <button
+                                className={`buttons-${theme} change-password-btn button-control`}
+                                type='reset'
+                                onClick={handleShowPws}
+                            >
+                                Change password
+                            </button>
+                        </div>
+
                         <Form.Group
                             className={`update-checkbox d-flex justify-content-center mb-4`}
                         >
@@ -351,6 +302,7 @@ export default function UpdateProfileUser({ user, token, setOpen }) {
                                 type='checkbox'
                                 name='isBusinessAccount'
                                 value={formData.isBusinessAccount}
+                                defaultChecked={formData.isBusinessAccount}
                                 onChange={handleChange}
                             />
                         </Form.Group>
@@ -373,6 +325,29 @@ export default function UpdateProfileUser({ user, token, setOpen }) {
                     </Form>
                 </Modal.Body>
             </Modal>
+
+            <UpdateAccPsw
+                user={user}
+                token={token}
+                theme={theme}
+                showPws={showPws}
+                handleClosePws={handleClosePws}
+                password={password}
+                setPassword={setPassword}
+                newPassword={newPassword}
+                setNewPassword={setNewPassword}
+                matchPassword={matchPassword}
+                setMatchPassword={setMatchPassword}
+                errors={errors}
+                setErrors={setErrors}
+                handleShowConfirm={handleShowConfirm}
+            />
+
+            <UpdatedUserMsg
+                showPws={showPws}
+                showConfirm={showConfirm}
+                handleCloseConfirm={handleCloseConfirm}
+            />
         </>
     );
 }

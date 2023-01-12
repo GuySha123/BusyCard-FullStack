@@ -1,7 +1,7 @@
 const userOperations = require('../../mongoDB/customerOperations');
 
 /** @type {import("express").RequestHandler} **/
-async function updateUserPassword(req, res) {
+async function updateUserPasswordDb(req, res) {
     const userid = req.query.userid;
     const { password } = req.body;
 
@@ -17,4 +17,4 @@ async function updateUserPassword(req, res) {
     return res.json(resultFromDb);
 }
 
-module.exports = updateUserPassword;
+module.exports = updateUserPasswordDb;

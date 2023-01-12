@@ -1,12 +1,11 @@
 import { faUser, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { Table } from 'react-bootstrap';
+import '../../assets/styles/user/UserList.css';
 import UpdateUser from '../../components/users/UpdateUser';
 import { ThemeContext } from '../../context/ThemeContext';
 import DeleteMsgClient from '../messages/DeleteMsgClient';
-import '../../assets/styles/user/UserList.css';
 
 export default function UsersList({ users, onDelete }) {
     const { theme } = useContext(ThemeContext);

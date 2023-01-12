@@ -64,10 +64,10 @@ async function updateUserPassword(userid, password) {
         const filter = {
             _id: userid,
         };
-
+        const hashedPassword = bcryptjs.hashSync(password);
         const userPasswordToUpdate = await customerModel.findOneAndUpdate(
             filter,
-            (password = bcryptjs.hashSync(password))
+            { password: hashedPassword }
         );
 
         return userPasswordToUpdate;

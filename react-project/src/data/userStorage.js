@@ -12,10 +12,12 @@ export async function signinUser(email, password) {
         }),
     });
     if (!response.ok) {
-        throw new Error('An error occurred while fetching the user');
+        const error = new Error('An error occurred while fetching the user');
+        error.status = response.status;
+        throw error;
     }
     const user = await response.json();
-    console.log('Logged In');
+
     return user;
 }
 
@@ -72,7 +74,7 @@ export async function updateUser(formData, token, id) {
     return user;
 }
 
-export async function updateUserPassword(password, token, id) {
+export async function updateUserPassword(newPassword, token, id) {
     const response = await fetch(
         BASE_URL + '/customers/updatepassword?userid=' + id,
         {
@@ -81,7 +83,7 @@ export async function updateUserPassword(password, token, id) {
                 'Content-Type': 'application/json',
                 token: token,
             },
-            body: JSON.stringify(password),
+            body: JSON.stringify({ password: newPassword }),
         }
     );
     if (!response.ok) {

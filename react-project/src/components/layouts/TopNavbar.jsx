@@ -1,8 +1,8 @@
 import {
+    faMoon,
+    faSun,
     faUser,
     faUserTie,
-    faSun,
-    faMoon,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useContext } from 'react';
@@ -10,12 +10,12 @@ import { Stack } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
+import BusyCardSmallLogo from '../../assets/images/logo/BusyCardSmallLogo.png';
 import '../../assets/styles/navbar-footer/TopNavbar.css';
 import { LoginContext } from '../../context/LoginContext';
 import { ThemeContext } from '../../context/ThemeContext';
 import { UserInfoContext } from '../../context/UserInfoContext';
 import { UserTokenContext } from '../../context/UserTokenContext';
-import BusyCardSmallLogo from '../../assets/images/logo/BusyCardSmallLogo.png';
 
 export default function TopNavbar() {
     const [loggedIn, setLoggedIn] = useContext(LoginContext);

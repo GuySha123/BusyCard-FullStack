@@ -26,9 +26,13 @@ export default function Cards() {
                                     <div className={'page-title'}>
                                         <h1 className={'m-0'}>Cards</h1>
                                     </div>
-                                    <div className={'title-btn-area me-3'}>
-                                        <CreateCard />
-                                    </div>
+                                    {user?.isBusinessAccount ? (
+                                        <div className={'title-btn-area me-3'}>
+                                            <CreateCard />
+                                        </div>
+                                    ) : (
+                                        <></>
+                                    )}
                                 </div>
                             </div>
                             <ShowCards />

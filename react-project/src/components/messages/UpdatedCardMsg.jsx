@@ -11,7 +11,7 @@ export default function UpdatedCardMsg({ showConfirm, handleCloseConfirm }) {
             <Modal show={showConfirm} onHide={handleCloseConfirm}>
                 <Modal.Body className={`msg-container components-${theme} `}>
                     <Modal.Title className={`msg-title`}>
-                        The card has been Updated successfully
+                        The card has been updated successfully
                     </Modal.Title>
                 </Modal.Body>
             </Modal>
