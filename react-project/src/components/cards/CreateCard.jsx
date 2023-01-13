@@ -3,7 +3,7 @@ import {
     faImage,
     faLocationDot,
     faMessage,
-    faPhone
+    faPhone,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react';
@@ -45,7 +45,10 @@ export default function CreateCard() {
         })}`,
         cardEditor: `${user?.firstName} ${user?.lastName}`,
     });
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+        setErrors({});
+    };
     const handleShow = () => setShow(true);
     const handleCloseConfirm = () => {
         setShowConfirm(false);

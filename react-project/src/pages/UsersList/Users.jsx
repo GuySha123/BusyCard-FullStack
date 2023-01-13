@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-/* import SearchUsers from '../../components/user-list/SearchUsers'; */
+import React, { useContext, useEffect, useMemo, useState } from 'react';
+import SearchUsers from '../../components/user-list/SearchUsers';
 import UsersList from '../../components/user-list/UsersList';
 import { ThemeContext } from '../../context/ThemeContext';
 import { UserInfoContext } from '../../context/UserInfoContext';
@@ -13,24 +13,18 @@ export default function Users() {
     const { token } = useContext(UserTokenContext);
     const { user } = useContext(UserInfoContext);
     const [users, setUsers] = useState([]);
+    const [text, setText] = useState('');
+    const [searchChoice, setSearchChoice] = useState('');
+    const [searchUserType, setSearchUserType] = useState('');
 
     useEffect(() => {
         reRender();
     }, []);
 
-    function onSearchChange(text /* , searchChoice, searchUserType */) {
-        getUsers()
-            .then((userJSON) => {
-                let tus = userJSON.filter((u) => {
-                    return (
-                        u.email.toLowerCase().indexOf(text) > -1 ||
-                        u.firstName.toLowerCase().indexOf(text) > -1 ||
-                        u.lastName.toLowerCase().indexOf(text) > -1
-                    );
-                });
-                setUsers(tus);
-            })
-            .catch((error) => alert(error.message));
+    function onSearchChange(text, searchChoice, searchUserType) {
+        setText(text);
+        setSearchChoice(searchChoice);
+        setSearchUserType(searchUserType);
     }
 
     function onDeleteClick(id) {
@@ -50,6 +44,33 @@ export default function Users() {
             .catch((error) => alert(error.message));
     }
 
+    const filteredUsers = useMemo(() => {
+        return users.filter((u) => {
+            const useTypePass =
+                searchUserType === 'User type...' ||
+                (u.isBusinessAccount && searchUserType === 'Business') ||
+                (!u.isBusinessAccount && searchUserType === 'User') ||
+                !searchUserType;
+
+            const searchChoiceBy =
+                searchChoice === 'Search by...' ||
+                (u.email.toLowerCase().indexOf(text.toLowerCase()) > -1 &&
+                    searchChoice === 'Email') ||
+                (u.firstName.toLowerCase().indexOf(text.toLowerCase()) > -1 &&
+                    searchChoice === 'First name') ||
+                (u.lastName.toLowerCase().indexOf(text.toLowerCase()) > -1 &&
+                    searchChoice === 'Last name') ||
+                !searchChoice;
+
+            const searchPass =
+                !text ||
+                u.email.toLowerCase().indexOf(text.toLowerCase()) > -1 ||
+                u.firstName.toLowerCase().indexOf(text.toLowerCase()) > -1 ||
+                u.lastName.toLowerCase().indexOf(text.toLowerCase()) > -1;
+            return useTypePass && searchPass && searchChoiceBy;
+        });
+    }, [users, text, searchUserType, searchChoice]);
+
     return (
         <>
             {!token && !user && !user.isAdminAccount ? (
@@ -60,9 +81,9 @@ export default function Users() {
                         <div className={`page-content-container my-4`}>
                             <h1 className={'m-0'}>Users List</h1>
                             <section>
-                                {/* <SearchUsers onChange={onSearchChange} /> */}
+                                <SearchUsers onChange={onSearchChange} />
                                 <UsersList
-                                    users={users}
+                                    users={filteredUsers}
                                     onDelete={onDeleteClick}
                                 />
                             </section>

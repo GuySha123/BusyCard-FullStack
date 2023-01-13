@@ -1,45 +1,16 @@
-import {
-    faEllipsisVertical,
-    faLocationDot,
-    faPhone,
-} from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import businessDefaultCardImage from '../../assets/images/cards/businesscard1015419960720.jpg';
+import '../../assets/styles/cards/HomePageCards.css';
 import { ThemeContext } from '../../context/ThemeContext';
-import { UserInfoContext } from '../../context/UserInfoContext';
 import CardDetails from './CardDetails';
-import CardSettingsDropdown from './CardSettingsDropdown';
 
-export default function CardsTemplate({ cards, onDelete }) {
+export default function HomePageCards({ cards }) {
     const { theme } = useContext(ThemeContext);
-    const { user } = useContext(UserInfoContext);
-    const [open, setOpen] = useState(false);
-    const [openId, setOpenId] = useState(null);
-    let menuRef = useRef();
-
-    useEffect(() => {
-        let handler = (e) => {
-            if (
-                menuRef.current &&
-                !menuRef.current.contains(e.target) &&
-                document.getElementById('card-num: ' + openId) &&
-                !document
-                    .getElementById('card-num: ' + openId)
-                    .contains(e.target)
-            ) {
-                setOpen(false);
-            }
-        };
-
-        document.addEventListener('mousedown', handler);
-        document.addEventListener('touchstart', handler);
-
-        return () => {
-            document.removeEventListener('mousedown', handler);
-            document.removeEventListener('touchstart', handler);
-        };
-    });
+    const [isChecked1, setIsChecked1] = useState(true);
+    const [isChecked2, setIsChecked2] = useState(false);
+    const [isChecked3, setIsChecked3] = useState(false);
 
     const parseDateString = (dateString) => {
         const [date, time] = dateString.split(', ');
@@ -52,6 +23,7 @@ export default function CardsTemplate({ cards, onDelete }) {
         const dateB = parseDateString(b.businessCreateDate);
         return dateB - dateA;
     });
+    const firstFiveCards = sortedCards.slice(0, 3);
 
     if (cards.length == 0) {
         return (
@@ -68,10 +40,15 @@ export default function CardsTemplate({ cards, onDelete }) {
         );
     }
 
-    const getColumnsForRow = () => {
-        let drawCards = sortedCards.map((c, i) => {
+    const getHomePageCards = () => {
+        let drawCards = firstFiveCards.map((c, i) => {
             return (
-                <div key={i} className={`cards-col`}>
+                <label
+                    key={i}
+                    htmlFor={`item-${i + 1}`}
+                    className={`home-card`}
+                    id={`home-card-${i + 1}`}
+                >
                     {/* Container */}
                     <div
                         className={`card-container  business-cards-${theme}`}
@@ -100,47 +77,6 @@ export default function CardsTemplate({ cards, onDelete }) {
                                     <h2>{c.businessName}</h2>
                                     <h3>{c.cardEditor}</h3>
                                 </div>
-                                {/* Dropdown menu */}
-                                {(user && user.isAdminAccount) ||
-                                user?._id === c.userId ? (
-                                    <div
-                                        ref={menuRef}
-                                        id={'card-num: ' + i}
-                                        className={`card-settings`}
-                                    >
-                                        <div
-                                            className={`menu-trigger`}
-                                            onClick={() => {
-                                                setOpen(!open);
-                                                setOpenId(i);
-                                            }}
-                                        >
-                                            <FontAwesomeIcon
-                                                icon={faEllipsisVertical}
-                                                className={`card-settings-dot`}
-                                            ></FontAwesomeIcon>
-                                        </div>
-
-                                        <div
-                                            className={`dropdown-menu-custom  dropdown-menu-box-${theme}  ${
-                                                open && openId === i
-                                                    ? 'active'
-                                                    : 'inactive'
-                                            } `}
-                                        >
-                                            <ul>
-                                                <CardSettingsDropdown
-                                                    card={c}
-                                                    id={i}
-                                                    onDelete={onDelete}
-                                                    setOpen={setOpen}
-                                                />
-                                            </ul>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <></>
-                                )}
                             </div>
                         </div>
 
@@ -182,11 +118,36 @@ export default function CardsTemplate({ cards, onDelete }) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </label>
             );
         });
         return drawCards;
     };
 
-    return <div className={`cards-area-grid`}>{getColumnsForRow()}</div>;
+    return (
+        <div className={`home-card-area`}>
+            <input
+                type='radio'
+                name='slider'
+                id={`item-1`}
+                checked={isChecked1}
+                onChange={() => setIsChecked1(!isChecked1)}
+            />
+            <input
+                type='radio'
+                name='slider'
+                id={`item-2`}
+                checked={isChecked2}
+                onChange={() => setIsChecked2(!isChecked2)}
+            />
+            <input
+                type='radio'
+                name='slider'
+                id={`item-3`}
+                checked={isChecked3}
+                onChange={() => setIsChecked3(!isChecked3)}
+            />
+            <div className='home-cards'>{getHomePageCards()}</div>
+        </div>
+    );
 }

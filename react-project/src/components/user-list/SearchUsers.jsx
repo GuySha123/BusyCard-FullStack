@@ -18,7 +18,11 @@ export default function SearchUsers(props) {
                         value={text}
                         onChange={(e) => {
                             setText(e.target.value);
-                            props.onChange(e.target.value);
+                            props.onChange(
+                                e.target.value,
+                                searchChoice,
+                                searchUserType
+                            );
                         }}
                     />
                 </Form.Group>
@@ -29,7 +33,11 @@ export default function SearchUsers(props) {
                         value={searchChoice}
                         onChange={(e) => {
                             setSearchChoice(e.target.value);
-                            props.onChange(e.target.value);
+                            props.onChange(
+                                text,
+                                e.target.value,
+                                searchUserType
+                            );
                         }}
                     >
                         <option>Search by...</option>
@@ -46,7 +54,7 @@ export default function SearchUsers(props) {
                     value={searchUserType}
                     onChange={(e) => {
                         setSearchUserType(e.target.value);
-                        props.onChange(e.target.value);
+                        props.onChange(text, searchChoice, e.target.value);
                     }}
                 >
                     <option>User type...</option>
