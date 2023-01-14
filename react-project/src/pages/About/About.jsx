@@ -74,11 +74,11 @@ export default function About() {
                             </Accordion.Item>
                             <Accordion.Item eventKey='3'>
                                 <Accordion.Header>
-                                    Do I need to put my real email adress?
+                                    Do I need to put my real email address?
                                 </Accordion.Header>
                                 <Accordion.Body>
                                     No, you can feel free to put whatever email
-                                    adress you can think of just make sure it
+                                    address you can think of just make sure it
                                     has name@somthing.something
                                 </Accordion.Body>
                             </Accordion.Item>

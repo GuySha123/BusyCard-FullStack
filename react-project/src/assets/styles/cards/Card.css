@@ -25,7 +25,6 @@
     grid-auto-flow: column;
     grid-auto-columns: 1fr max-content;
     height: 100%;
-    
 }
 
 .business-title {
@@ -33,13 +32,13 @@
     align-content: center;
 }
 
-.business-title>h2 {
+.business-title > h2 {
     font-size: 1.75em;
     font-weight: 700 !important;
     margin-bottom: 2px;
 }
 
-.business-title>h3 {
+.business-title > h3 {
     font-size: 1em;
     font-weight: 500;
     margin-bottom: 0;
@@ -66,12 +65,10 @@
     opacity: 1;
 }
 
-
-
 .card-content {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(8.875rem, 34.375rem));
-    grid-template-rows: repeat(auto-fill, minmax(1rem, 1.563rem)) ;
+    grid-template-rows: repeat(auto-fill, minmax(1rem, 1.563rem));
     grid-auto-flow: column;
 }
 
@@ -81,7 +78,6 @@
     grid-auto-rows: min-content;
     opacity: 0.6;
 }
-
 
 .description {
     text-overflow: ellipsis;
@@ -95,24 +91,21 @@
     grid-auto-flow: column;
 }
 
-.adress {
+.address {
     display: grid;
     grid-auto-columns: 0.1fr 1fr;
     grid-auto-flow: column;
 }
 
-.phone-adress-icon {
+.phone-address-icon {
     display: grid;
     align-content: center;
     justify-content: center;
 }
 
-.get-details-btn{
+.get-details-btn {
     display: grid;
     grid-row: 3/5;
     justify-content: center;
     align-content: center;
 }
-
-
-

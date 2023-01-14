@@ -92,7 +92,7 @@ export default function HomePageCards({ cards }) {
                             </div>
 
                             <div className={`phone my-2`}>
-                                <div className={`phone-adress-icon`}>
+                                <div className={`phone-address-icon`}>
                                     <FontAwesomeIcon
                                         icon={faPhone}
                                         className={``}
@@ -102,14 +102,14 @@ export default function HomePageCards({ cards }) {
                                     {c.businessPhone}
                                 </div>
                             </div>
-                            <div className={`adress mb-2`}>
-                                <div className={`phone-adress-icon`}>
+                            <div className={`address mb-2`}>
+                                <div className={`phone-address-icon`}>
                                     <FontAwesomeIcon
                                         icon={faLocationDot}
                                         className={``}
                                     ></FontAwesomeIcon>
                                 </div>
-                                <div className={`adress-info`}>
+                                <div className={`address-info`}>
                                     {c.businessAddress}
                                 </div>
                             </div>

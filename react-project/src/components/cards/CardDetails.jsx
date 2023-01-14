@@ -75,7 +75,7 @@ export default function CardDetails({ card }) {
                     </div>
 
                     <div className={`phone-details `}>
-                        <div className={`phone-adress-icon`}>
+                        <div className={`phone-address-icon`}>
                             <FontAwesomeIcon
                                 icon={faPhone}
                                 className={``}
@@ -85,14 +85,14 @@ export default function CardDetails({ card }) {
                             {businessPhone}
                         </div>
                     </div>
-                    <div className={`adress-details mb-2`}>
-                        <div className={`phone-adress-icon`}>
+                    <div className={`address-details mb-2`}>
+                        <div className={`phone-address-icon`}>
                             <FontAwesomeIcon
                                 icon={faLocationDot}
                                 className={``}
                             ></FontAwesomeIcon>
                         </div>
-                        <div className={`adress-info ms-1`}>
+                        <div className={`address-info ms-1`}>
                             {businessAddress}
                         </div>
                     </div>
