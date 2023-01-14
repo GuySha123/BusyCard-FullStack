@@ -21,7 +21,7 @@ export default function About() {
                     <div className={`p-4 components-${theme} `}>
                         <h3>Welcome to Busycard!</h3>
                         <p>
-                            This website is my little project to truly
+                            Thiss website is my little project to truly
                             understand how to code in React.js. <br />
                             On this website you'll be able to decide if you want
                             to register as a regular user or business user.{' '}
