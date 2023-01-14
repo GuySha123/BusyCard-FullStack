@@ -20,7 +20,7 @@ export default function Cards() {
                     <div className={`page-container body-${theme} h-100`}>
                         <div className={`page-content-container my-4`}>
                             <div
-                                className={`page-title-area mb-5 components-${theme} `}
+                                className={`page-title-area mb-3 components-${theme} `}
                             >
                                 <div className={`title-grid-holder ms-3`}>
                                     <div className={'page-title'}>
@@ -35,6 +35,7 @@ export default function Cards() {
                                     )}
                                 </div>
                             </div>
+
                             <ShowCards />
                         </div>
                     </div>

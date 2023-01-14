@@ -1,8 +1,5 @@
 import { useState } from 'react';
-/* import Form from 'react-bootstrap/Form'; */
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
+import '../../assets/styles/user/SearchUsers.css';
 
 export default function SearchUsers(props) {
     const [text, setText] = useState('');
@@ -11,46 +8,40 @@ export default function SearchUsers(props) {
 
     return (
         <>
-            <Row className='mb-3'>
-                <Form.Group as={Col} controlId='formGridCity'>
-                    <Form.Control
-                        placeholder='Search'
-                        value={text}
-                        onChange={(e) => {
-                            setText(e.target.value);
-                            props.onChange(
-                                e.target.value,
-                                searchChoice,
-                                searchUserType
-                            );
-                        }}
-                    />
-                </Form.Group>
+            <div className={`search-users-container`}>
+                <input
+                    className={`search-text me-2`}
+                    type='text'
+                    placeholder='Search'
+                    value={text}
+                    onChange={(e) => {
+                        setText(e.target.value);
+                        props.onChange(
+                            e.target.value,
+                            searchChoice,
+                            searchUserType
+                        );
+                    }}
+                />
 
-                <Form.Group as={Col} controlId='formGridState'>
-                    <Form.Select
-                        defaultValue='Choose...'
-                        value={searchChoice}
-                        onChange={(e) => {
-                            setSearchChoice(e.target.value);
-                            props.onChange(
-                                text,
-                                e.target.value,
-                                searchUserType
-                            );
-                        }}
-                    >
-                        <option>Search by...</option>
-                        <option>Email</option>
-                        <option>First name</option>
-                        <option>Last name</option>
-                    </Form.Select>
-                </Form.Group>
-            </Row>
+                <select
+                    className={`search-select me-2`}
+                    name='search-by'
+                    value={searchChoice}
+                    onChange={(e) => {
+                        setSearchChoice(e.target.value);
+                        props.onChange(text, e.target.value, searchUserType);
+                    }}
+                >
+                    <option>Search by...</option>
+                    <option>Email</option>
+                    <option>First name</option>
+                    <option>Last name</option>
+                </select>
 
-            <Form.Group controlId='formGridState'>
-                <Form.Select
-                    defaultValue='Choose...'
+                <select
+                    className={`search-select`}
+                    name='user-type'
                     value={searchUserType}
                     onChange={(e) => {
                         setSearchUserType(e.target.value);
@@ -60,8 +51,8 @@ export default function SearchUsers(props) {
                     <option>User type...</option>
                     <option>User</option>
                     <option>Business</option>
-                </Form.Select>
-            </Form.Group>
+                </select>
+            </div>
         </>
     );
 }

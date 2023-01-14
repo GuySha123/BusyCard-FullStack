@@ -1,0 +1,64 @@
+.search-users-container {
+    position: relative;
+    display: flex;
+    margin: auto;
+    width: 70vw;
+}
+.search-cards-container {
+    position: relative;
+    display: flex;
+    margin: auto;
+    width: 70vw;
+}
+
+@media screen and (max-width: 576px) {
+    .search-cards-container {
+        width: 95vw;
+    }
+}
+
+.search-cards-grid{
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 0.8fr 0.5fr;
+    gap: 5px;
+}
+
+.search-text-place{
+    display: grid;
+}
+
+.search-text{
+    border-radius: 10px;
+    width: 100%;
+    height: 2.5rem;
+    background-image: url(../../images/search/search-icon.png);
+    background-position: 10px 10px;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+
+}
+.search-text:focus{
+    border: 2px solid #0791f3;
+    box-shadow: inset 0 1px 1px rgba(42, 126, 235, 0.6), 0 0 8px rgb(7, 145, 243);
+}
+.search-select{
+    border-radius: 10px;
+    width: 100%;
+    height: 2.5rem;
+}
+
+.search-select:focus {
+    box-shadow: inset 0 1px 1px rgba(42, 126, 235, 0.6), 0 0 8px rgb(7, 145, 243);
+}
+
+.search-date{
+    border-radius: 10px;
+    width: 100%;
+    height: 2.5rem;
+}
+
+.search-date:focus {
+    box-shadow: inset 0 1px 1px rgba(42, 126, 235, 0.6), 0 0 8px rgb(7, 145, 243);
+}

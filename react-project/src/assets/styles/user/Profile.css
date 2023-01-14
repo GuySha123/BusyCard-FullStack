@@ -15,13 +15,9 @@
 
 .profile-grid-holder {
     display: grid;
+    align-content: center;
     width: 100%;
     grid-template-columns: 2fr 8rem 40px
-}
-
-.profile-grid-holder {
-    display: grid;
-    align-content: center;
 }
 
 .profile-picture-container {
