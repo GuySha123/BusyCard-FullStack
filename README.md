@@ -1,2 +1,3 @@
-# ReactProject---Guy-Shalev
-Project based React by Guy Shalev
+# BusyCard - by: Guy-Shalev
+
+This is a REACT project made by Guy Shalev
