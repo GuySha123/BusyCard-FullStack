@@ -7,11 +7,7 @@ import { UserTokenContext } from '../../context/UserTokenContext';
 export default function SignIn() {
     const { user } = useContext(UserInfoContext);
     const { token } = useContext(UserTokenContext);
-    /* const navigate = useNavigate();
 
-    if (user || token) {
-        navigate('/');
-    } */
     return (
         <>
             <SignInComponent />

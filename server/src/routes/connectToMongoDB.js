@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
 
+const dbUrl =
+    'mongodb+srv://guyshaleva:rYWl593puLygni1o@cluster0.qhwl6xr.mongodb.net/BusyCard?retryWrites=true&w=majority';
+
+const connectionParams = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+};
+
 mongoose
-    .connect('mongodb://localhost/ReactProjectCustomerDataBase')
-    .then((x) => console.log('Connected to mongo db'))
-    .catch(() => console.log('Problem with mongo db'));
+    .connect(dbUrl, connectionParams)
+    .then((x) => console.info('Connected to mongo DB'))
+    .catch((e) => console.log('Error', e));
